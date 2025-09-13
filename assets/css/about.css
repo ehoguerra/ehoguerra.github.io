@@ -1,0 +1,324 @@
+/* =============================================
+   SEÇÃO SOBRE - ABOUT SECTION
+   ============================================= */
+
+.about {
+  background: var(--light-color);
+  position: relative;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+}
+
+.about-content {
+  padding: var(--spacing-xl);
+}
+
+.about-title {
+  font-size: var(--fs-4xl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--dark-color);
+}
+
+.about-subtitle {
+  font-size: var(--fs-xl);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.about-description {
+  font-size: var(--fs-lg);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-xl);
+  color: var(--gray-dark);
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.stat-item {
+  text-align: center;
+  padding: var(--spacing-md);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.stat-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-number {
+  font-size: var(--fs-3xl);
+  font-weight: 700;
+  color: var(--primary-color);
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+  font-size: var(--fs-sm);
+  color: var(--gray-medium);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.about-image {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+}
+
+.profile-image {
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  transition: all var(--transition-slow);
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+.profile-image:hover {
+  transform: scale(1.02);
+}
+
+.image-decoration {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0.7;
+  animation: pulse 3s infinite;
+}
+
+.image-decoration-2 {
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 80px;
+  height: 80px;
+  background: var(--gradient-secondary);
+  border-radius: var(--radius-lg);
+  z-index: 1;
+  opacity: 0.6;
+  animation: bounce 2s infinite;
+}
+
+/* Skills/Technologies */
+.about-skills {
+  margin-top: var(--spacing-xl);
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.skill-tag {
+  background: var(--white);
+  color: var(--primary-color);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--primary-color);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  cursor: default;
+}
+
+.skill-tag:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.skill-tag.featured {
+  background: var(--gradient-primary);
+  color: var(--white);
+  border-color: transparent;
+}
+
+/* Download CV Button */
+.cv-download {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+.cv-download .btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.cv-download .btn::after {
+  content: '📄';
+  position: absolute;
+  right: 15px;
+  transition: all var(--transition-normal);
+}
+
+.cv-download .btn:hover::after {
+  transform: scale(1.2);
+}
+
+/* Timeline */
+.timeline {
+  margin-top: var(--spacing-2xl);
+}
+
+.timeline-item {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  bottom: -20px;
+  width: 2px;
+  background: var(--gradient-primary);
+}
+
+.timeline-item:last-child::before {
+  display: none;
+}
+
+.timeline-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: var(--fs-lg);
+  flex-shrink: 0;
+  z-index: 2;
+  position: relative;
+}
+
+.timeline-content {
+  background: var(--white);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  flex: 1;
+  transition: all var(--transition-normal);
+}
+
+.timeline-content:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateX(8px);
+}
+
+.timeline-date {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.timeline-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  color: var(--dark-color);
+}
+
+.timeline-description {
+  color: var(--gray-dark);
+  line-height: 1.6;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+  
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .about-image {
+    max-width: 300px;
+    height: 300px;
+    margin: 0 auto var(--spacing-xl);
+  }
+  
+  .profile-image {
+    height: 300px;
+  }
+  
+  .image-decoration,
+  .image-decoration-2 {
+    display: none;
+  }
+  
+  .timeline-item {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .timeline-item::before {
+    display: none;
+  }
+  
+  .timeline-content:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .skills-grid {
+    justify-content: center;
+  }
+  
+  .about-image {
+    max-width: 250px;
+    height: 250px;
+  }
+  
+  .profile-image {
+    height: 250px;
+  }
+}

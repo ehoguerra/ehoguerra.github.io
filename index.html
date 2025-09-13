@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Artur Guerra - Desenvolvedor Full-Stack especializado em Python, Flask e sistemas SaaS. Portfólio com projetos modernos e soluções web eficientes.">
+    <meta name="keywords" content="Artur Guerra, desenvolvedor, full-stack, Python, Flask, SaaS, web development, portfolio">
+    <meta name="author" content="Artur Guerra">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arturguerra.dev/">
+    <meta property="og:title" content="Artur Guerra - Desenvolvedor Full-Stack">
+    <meta property="og:description" content="Desenvolvedor Full-Stack especializado em Python, Flask e sistemas SaaS">
+    <meta property="og:image" content="./assets/images/og-image.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://arturguerra.dev/">
+    <meta property="twitter:title" content="Artur Guerra - Desenvolvedor Full-Stack">
+    <meta property="twitter:description" content="Desenvolvedor Full-Stack especializado em Python, Flask e sistemas SaaS">
+    <meta property="twitter:image" content="./assets/images/og-image.jpg">
+
+    <title>Artur Guerra - Desenvolvedor Full-Stack | Python & Flask Specialist</title>
+    
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/apple-touch-icon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/about.css">
+    <link rel="stylesheet" href="./assets/css/projects.css">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Artur Guerra",
+        "jobTitle": "Full-Stack Developer",
+        "url": "https://arturguerra.dev",
+        "email": "arturpvguerra@gmail.com",
+        "telephone": "+55-22-99971-4055",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Nova Friburgo",
+            "addressRegion": "RJ",
+            "addressCountry": "BR"
+        },
+        "alumniOf": "CEFET/RJ - UNED Nova Friburgo",
+        "knowsAbout": ["Python", "Flask", "JavaScript", "PostgreSQL", "Web Development", "SaaS"],
+        "sameAs": [
+            "https://github.com/ehoguerra",
+            "https://www.linkedin.com/in/artur-guerra-dev/"
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <a href="#home" class="logo">
+                <i class="fas fa-code"></i>
+                <span>Artur Guerra</span>
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#about" class="nav-link" data-i18n="nav.about">Sobre</a></li>
+                <li><a href="#experience" class="nav-link" data-i18n="nav.experience">Experiência</a></li>
+                <li><a href="#projects" class="nav-link" data-i18n="nav.projects">Projetos</a></li>
+                <li><a href="#skills" class="nav-link" data-i18n="nav.skills">Habilidades</a></li>
+                <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Contato</a></li>
+                
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="pt">PT</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </ul>
+            
+            <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero section" id="home">
+        <div class="container">
+            <div class="hero-content" data-animation="fadeInUp">
+                <p class="hero-greeting" data-i18n="hero.greeting">Olá, eu sou</p>
+                <h1 class="hero-title" data-i18n="hero.name">Artur Guerra</h1>
+                <h2 class="hero-subtitle" data-i18n="hero.title">Desenvolvedor Full-Stack</h2>
+                <p class="hero-description" data-i18n="hero.description">
+                    Desenvolvedor apaixonado por criar soluções web modernas e eficientes, 
+                    com foco em experiência do usuário e arquiteturas escaláveis.
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary" data-i18n="hero.cta.projects">
+                        <i class="fas fa-folder-open"></i>
+                        Ver Projetos
+                    </a>
+                    <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta.contact">
+                        <i class="fas fa-envelope"></i>
+                        Entre em Contato
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#about" class="hero-scroll" data-i18n="hero.scroll">
+            <span>Role para baixo</span>
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="section-title" data-animation="fadeInUp">
+                <h2 data-i18n="about.title">Sobre Mim</h2>
+                <p data-i18n="about.subtitle">Desenvolvedor Full-Stack focado em criar sistemas SaaS e Web</p>
+            </div>
+            
+            <div class="about-container">
+                <div class="about-content" data-animation="fadeInLeft">
+                    <h3 data-i18n="about.subtitle">Desenvolvedor Full-Stack</h3>
+                    <p class="about-description" data-i18n="about.description">
+                        Sou um desenvolvedor full-stack focado em criar sistemas SaaS e aplicações web com Python e Flask. 
+                        Tenho experiência em desenvolvimento de dashboards personalizados, gestão de bancos de dados e 
+                        criação de interfaces modernas e responsivas.
+                    </p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="2">2</span>
+                            <span class="stat-label" data-i18n="about.stats.projects">Projetos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="1">1</span>
+                            <span class="stat-label" data-i18n="about.stats.experience">Anos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="8">8</span>
+                            <span class="stat-label" data-i18n="about.stats.technologies">Tecnologias</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" data-count="1">1</span>
+                            <span class="stat-label" data-i18n="about.stats.clients">Clientes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="about-skills">
+                        <h4 data-i18n="about.skills.title">Principais Tecnologias</h4>
+                        <div class="skills-grid">
+                            <span class="skill-tag featured">Python</span>
+                            <span class="skill-tag featured">Flask</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Bootstrap</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">SQLAlchemy</span>
+                            <span class="skill-tag">Git</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cv-download">
+                        <a href="./assets/documents/Artur_Guerra_CV_PT.pdf" 
+                           class="btn btn-outline" 
+                           download="Artur_Guerra_CV_PT.pdf"
+                           data-i18n="about.download">
+                            <i class="fas fa-download"></i>
+                            Baixar CV
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="about-image" data-animation="fadeInRight">
+                    <img src="./assets/images/profile-photo.jpg" 
+                         alt="Artur Guerra - Desenvolvedor Full-Stack" 
+                         class="profile-image"
+                         loading="lazy">
+                    <div class="image-decoration"></div>
+                    <div class="image-decoration-2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="experience section" id="experience">
+        <div class="container">
+            <div class="section-title" data-animation="fadeInUp">
+                <h2 data-i18n="experience.title">Experiência Profissional</h2>
+                <p data-i18n="experience.subtitle">Minha jornada profissional</p>
+            </div>
+            
+            <div class="timeline" data-animation="fadeInUp">
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date" data-i18n="experience.freelancer.period">2025</div>
+                        <h3 class="timeline-title" data-i18n="experience.freelancer.title">Desenvolvedor SaaS (Freelancer)</h3>
+                        <h4 class="timeline-company" data-i18n="experience.freelancer.company">Pecci Cuidado Integrado</h4>
+                        <p class="timeline-description" data-i18n="experience.freelancer.description">
+                            Desenvolvi um sistema completo de gerenciamento para clínicas de psicologia, incluindo 
+                            gestão de pacientes, agendamentos e evoluções clínicas com criptografia de dados. 
+                            Utilizei Python, Flask, PostgreSQL e Bootstrap para criar uma solução SaaS moderna e segura.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date" data-i18n="experience.student.period">2025-2028</div>
+                        <h3 class="timeline-title" data-i18n="experience.student.title">Estudante de Sistemas de Informação</h3>
+                        <h4 class="timeline-company" data-i18n="experience.student.company">CEFET/RJ - UNED Nova Friburgo</h4>
+                        <p class="timeline-description" data-i18n="experience.student.description">
+                            Cursando Bacharelado em Sistemas de Informação, aprofundando conhecimentos em 
+                            desenvolvimento de software, arquitetura de sistemas, banco de dados e metodologias de desenvolvimento.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects section" id="projects">
+        <div class="container">
+            <div class="section-title" data-animation="fadeInUp">
+                <h2 data-i18n="projects.title">Meus Projetos</h2>
+                <p data-i18n="projects.subtitle">Alguns dos meus trabalhos recentes</p>
+            </div>
+            
+            <div class="projects-filter" data-animation="fadeInUp">
+                <button class="filter-btn active" data-filter="all" data-i18n="projects.filter.all">Todos</button>
+                <button class="filter-btn" data-filter="web" data-i18n="projects.filter.web">Web Apps</button>
+                <button class="filter-btn" data-filter="saas" data-i18n="projects.filter.saas">SaaS</button>
+                <button class="filter-btn" data-filter="tools" data-i18n="projects.filter.tools">Ferramentas</button>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card featured-project" data-category="saas,web" data-animation="fadeInUp">
+                    <div class="project-featured" data-i18n="projects.featured">Em Destaque</div>
+                    <div class="project-image">
+                        <img src="./assets/images/projects/pecci-preview.jpg" 
+                             alt="Pecci Cuidado Integrado - Sistema de gestão para clínicas"
+                             loading="lazy">
+                        <div class="project-overlay">
+                            <a href="https://peccicuidadointegrado.com.br" class="btn btn-primary" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-i18n="projects.view">Ver Projeto</span>
+                            </a>
+                            <a href="https://github.com/ehoguerra/pecci-cuidado-integrado" class="btn btn-ghost" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i>
+                                <span data-i18n="projects.code">Ver Código</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">SaaS • Healthcare</div>
+                        <h3 class="project-title" data-i18n="project.pecci.title">Pecci Cuidado Integrado</h3>
+                        <p class="project-description" data-i18n="project.pecci.description">
+                            Sistema completo de gerenciamento para clínicas de psicologia com dashboard personalizado, 
+                            gestão de pacientes, agendamentos e sistema de criptografia para dados sensíveis.
+                        </p>
+                        
+                        <div class="project-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Segurança</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">LGPD</span>
+                                <span class="stat-label">Conforme</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">5+</span>
+                                <span class="stat-label">Módulos</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">SQLAlchemy</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://peccicuidadointegrado.com.br" class="btn btn-primary" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-i18n="projects.view">Ver Projeto</span>
+                            </a>
+                            <a href="https://github.com/ehoguerra/pecci-cuidado-integrado" class="btn btn-outline" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i>
+                                <span data-i18n="projects.code">Código</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="web,tools" data-animation="fadeInUp">
+                    <div class="project-image">
+                        <img src="./assets/images/projects/encurta-ai-preview.jpg" 
+                             alt="Encurta AI - Encurtador de URLs moderno"
+                             loading="lazy">
+                        <div class="project-overlay">
+                            <a href="https://github.com/ehoguerra/encurta-ai" class="btn btn-primary" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-i18n="projects.demo">Demo</span>
+                            </a>
+                            <a href="https://github.com/ehoguerra/encurta-ai" class="btn btn-ghost" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i>
+                                <span data-i18n="projects.code">Ver Código</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">Web App • Ferramentas</div>
+                        <h3 class="project-title" data-i18n="project.encurta.title">Encurta AI</h3>
+                        <p class="project-description" data-i18n="project.encurta.description">
+                            Encurtador de URLs moderno com interface elegante em preto e branco, 
+                            sistema de autenticação de usuários e funcionalidades de gerenciamento de links.
+                        </p>
+                        
+                        <div class="project-tech">
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">SQLAlchemy</span>
+                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">SQLite</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="https://github.com/ehoguerra/encurta-ai" class="btn btn-primary" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-i18n="projects.view">Ver Projeto</span>
+                            </a>
+                            <a href="https://github.com/ehoguerra/encurta-ai" class="btn btn-outline" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i>
+                                <span data-i18n="projects.code">Código</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-showcase" data-animation="fadeInUp">
+                <h3 data-i18n="tech.showcase.title">Tecnologias que Utilizo</h3>
+                <div class="tech-categories">
+                    <div class="tech-category">
+                        <h4 data-i18n="skills.backend.title">Backend</h4>
+                        <div class="tech-icons">
+                            <div class="tech-icon" data-name="Python">🐍</div>
+                            <div class="tech-icon" data-name="Flask">🌶️</div>
+                            <div class="tech-icon" data-name="SQLAlchemy">🔗</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h4 data-i18n="skills.frontend.title">Frontend</h4>
+                        <div class="tech-icons">
+                            <div class="tech-icon" data-name="HTML5">📄</div>
+                            <div class="tech-icon" data-name="CSS3">🎨</div>
+                            <div class="tech-icon" data-name="JavaScript">⚡</div>
+                            <div class="tech-icon" data-name="Bootstrap">🅱️</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h4 data-i18n="skills.database.title">Banco de Dados</h4>
+                        <div class="tech-icons">
+                            <div class="tech-icon" data-name="PostgreSQL">🐘</div>
+                            <div class="tech-icon" data-name="SQLite">📊</div>
+                            <div class="tech-icon" data-name="MySQL">🗄️</div>
+                        </div>
+                    </div>
+                    <div class="tech-category">
+                        <h4 data-i18n="skills.tools.title">Ferramentas</h4>
+                        <div class="tech-icons">
+                            <div class="tech-icon" data-name="Git">📚</div>
+                            <div class="tech-icon" data-name="VS Code">💻</div>
+                            <div class="tech-icon" data-name="Linux">🐧</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projects-cta" data-animation="fadeInUp">
+                <h3 data-i18n="projects.cta.title">Interessado em trabalhar comigo?</h3>
+                <p data-i18n="projects.cta.description">
+                    Estou sempre aberto a novos desafios e oportunidades de colaboração.
+                </p>
+                <a href="#contact" class="btn btn-ghost">
+                    <i class="fas fa-envelope"></i>
+                    <span data-i18n="projects.cta.button">Vamos Conversar</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills section" id="skills">
+        <div class="container">
+            <div class="section-title" data-animation="fadeInUp">
+                <h2 data-i18n="skills.title">Habilidades & Tecnologias</h2>
+                <p data-i18n="skills.subtitle">Ferramentas que uso no meu dia a dia</p>
+            </div>
+            
+            <div class="grid grid-2" data-animation="fadeInUp">
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-server"></i> <span data-i18n="skills.backend.title">Backend Development</span></h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <span class="skill-name">Python</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Flask</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">SQLAlchemy</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">REST APIs</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-palette"></i> <span data-i18n="skills.frontend.title">Frontend Development</span></h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <span class="skill-name">HTML5/CSS3</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">JavaScript</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Bootstrap</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Responsive Design</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-database"></i> <span data-i18n="skills.database.title">Database & Storage</span></h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <span class="skill-name">PostgreSQL</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">SQLite</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">MySQL</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Database Design</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tools"></i> <span data-i18n="skills.tools.title">Tools & Others</span></h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="skills-grid">
+                            <div class="skill-item">
+                                <span class="skill-name">Git/GitHub</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">VS Code</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Linux</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">SaaS Development</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card" data-animation="fadeInUp" style="margin-top: var(--spacing-2xl);">
+                <div class="card-header text-center">
+                    <h3><i class="fas fa-lightbulb"></i> Soft Skills</h3>
+                </div>
+                <div class="card-body">
+                    <div class="grid grid-3">
+                        <div class="soft-skill">
+                            <i class="fas fa-users"></i>
+                            <h4 data-i18n="skills.soft.teamwork">Trabalho em Equipe</h4>
+                        </div>
+                        <div class="soft-skill">
+                            <i class="fas fa-brain"></i>
+                            <h4 data-i18n="skills.soft.learning">Rápida Aprendizagem</h4>
+                        </div>
+                        <div class="soft-skill">
+                            <i class="fas fa-exchange-alt"></i>
+                            <h4 data-i18n="skills.soft.adaptability">Adaptabilidade</h4>
+                        </div>
+                        <div class="soft-skill">
+                            <i class="fas fa-handshake"></i>
+                            <h4 data-i18n="skills.soft.integrity">Integridade</h4>
+                        </div>
+                        <div class="soft-skill">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4 data-i18n="skills.soft.resilience">Resiliência</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="section-title" data-animation="fadeInUp">
+                <h2 data-i18n="contact.title">Entre em Contato</h2>
+                <p data-i18n="contact.subtitle">Vamos trabalhar juntos</p>
+            </div>
+            
+            <div class="grid grid-2">
+                <div class="contact-info" data-animation="fadeInLeft">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 data-i18n="contact.info.title">Informações de Contato</h3>
+                            <p data-i18n="contact.description">
+                                Estou sempre interessado em novos projetos e oportunidades. 
+                                Entre em contato comigo!
+                            </p>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <a href="mailto:arturpvguerra@gmail.com" data-i18n="contact.info.email">
+                                        arturpvguerra@gmail.com
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Telefone</h4>
+                                    <a href="api.whatsapp.com/send?phone=5522999714055" data-i18n="contact.info.phone">
+                                        +55 (22) 99971-4055
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Localização</h4>
+                                    <span data-i18n="contact.info.location">Nova Friburgo, RJ - Brasil</span>
+                                </div>
+                            </div>
+                            
+                            <div class="social-links">
+                                <a href="https://github.com/ehoguerra" target="_blank" rel="noopener" aria-label="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/artur-guerra-dev/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="mailto:arturpvguerra@gmail.com" aria-label="Email">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                                <a href="tel:+5522999714055" aria-label="Telefone">
+                                    <i class="fas fa-phone"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form" data-animation="fadeInRight">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="contact-form" action="#" method="POST" novalidate>
+                                <div class="form-group">
+                                    <label for="name">
+                                        <i class="fas fa-user"></i>
+                                        <span data-i18n="contact.form.name">Seu Nome</span>
+                                    </label>
+                                    <input type="text" 
+                                           id="name" 
+                                           name="name" 
+                                           placeholder="Digite seu nome completo" 
+                                           data-i18n-placeholder="contact.form.name.placeholder"
+                                           required
+                                           autocomplete="name">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">
+                                        <i class="fas fa-envelope"></i>
+                                        <span data-i18n="contact.form.email">Seu Email</span>
+                                    </label>
+                                    <input type="email" 
+                                           id="email" 
+                                           name="email" 
+                                           placeholder="Digite seu melhor email" 
+                                           data-i18n-placeholder="contact.form.email.placeholder"
+                                           required
+                                           autocomplete="email">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="subject">
+                                        <i class="fas fa-tag"></i>
+                                        <span data-i18n="contact.form.subject">Assunto</span>
+                                    </label>
+                                    <input type="text" 
+                                           id="subject" 
+                                           name="subject" 
+                                           placeholder="Qual o assunto?" 
+                                           data-i18n-placeholder="contact.form.subject.placeholder"
+                                           required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">
+                                        <i class="fas fa-comment"></i>
+                                        <span data-i18n="contact.form.message">Sua Mensagem</span>
+                                    </label>
+                                    <textarea id="message" 
+                                              name="message" 
+                                              rows="5" 
+                                              placeholder="Descreva seu projeto ou ideia..." 
+                                              data-i18n-placeholder="contact.form.message.placeholder"
+                                              required></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span data-i18n="contact.form.send">Enviar via WhatsApp</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <i class="fas fa-code"></i>
+                        <span>Artur Guerra</span>
+                    </div>
+                    <p>Desenvolvedor Full-Stack especializado em Python e Flask</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Links</h4>
+                        <ul>
+                            <li><a href="#about" data-i18n="nav.about">Sobre</a></li>
+                            <li><a href="#projects" data-i18n="nav.projects">Projetos</a></li>
+                            <li><a href="#skills" data-i18n="nav.skills">Habilidades</a></li>
+                            <li><a href="#contact" data-i18n="nav.contact">Contato</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Projetos</h4>
+                        <ul>
+                            <li><a href="https://peccicuidadointegrado.com.br" target="_blank" rel="noopener">Pecci Cuidado</a></li>
+                            <li><a href="https://github.com/ehoguerra/encurta-ai" target="_blank" rel="noopener">Encurta AI</a></li>
+                            <li><a href="https://github.com/ehoguerra" target="_blank" rel="noopener">Ver Todos</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Contato</h4>
+                        <ul>
+                            <li><a href="mailto:arturpvguerra@gmail.com">Email</a></li>
+                            <li><a href="https://www.linkedin.com/in/artur-guerra-dev/" target="_blank" rel="noopener">LinkedIn</a></li>
+                            <li><a href="https://github.com/ehoguerra" target="_blank" rel="noopener">GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>
+                    &copy; 2025 Artur Guerra. <span data-i18n="footer.rights">Todos os direitos reservados.</span>
+                    <span data-i18n="footer.made">Feito com</span> ❤️ <span data-i18n="footer.by">por Artur Guerra</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/js/main.js"></script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NQSST82FL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7NQSST82FL');
+    </script>
+</body>
+</html>
