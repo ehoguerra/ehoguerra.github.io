@@ -45,7 +45,8 @@ class LanguageSystem {
         'about.stats.experience': 'Anos',
         'about.stats.technologies': 'Tecnologias',
         'about.stats.clients': 'Clientes',
-        'about.download': 'Baixar CV',
+        'about.download.pt': 'Baixar CV (PT)',
+        'about.download.en': 'Baixar CV (EN)',
         'about.skills.title': 'Principais Tecnologias',
         
         'experience.title': 'Experiência Profissional',
@@ -141,7 +142,8 @@ class LanguageSystem {
         'about.stats.experience': 'Years',
         'about.stats.technologies': 'Technologies',
         'about.stats.clients': 'Clients',
-        'about.download': 'Download CV',
+        'about.download.pt': 'Download CV (PT)',
+        'about.download.en': 'Download CV (EN)',
         'about.skills.title': 'Main Technologies',
         
         'experience.title': 'Professional Experience',
@@ -275,6 +277,20 @@ class LanguageSystem {
       const translation = this.getTranslation(key, lang);
       if (translation) img.alt = translation;
     });
+    
+    // Controlar visibilidade dos botões de CV baseado no idioma
+    const cvBtnPt = document.querySelector('.cv-btn-pt');
+    const cvBtnEn = document.querySelector('.cv-btn-en');
+    
+    if (cvBtnPt && cvBtnEn) {
+      if (lang === 'pt') {
+        cvBtnPt.style.display = 'inline-flex';
+        cvBtnEn.style.display = 'none';
+      } else {
+        cvBtnPt.style.display = 'none';
+        cvBtnEn.style.display = 'inline-flex';
+      }
+    }
     
     this.updateLanguageButtons();
   }
