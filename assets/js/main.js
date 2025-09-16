@@ -102,7 +102,7 @@ class LanguageSystem {
         'contact.form.subject.placeholder': 'Qual o assunto?',
         'contact.form.message.placeholder': 'Descreva seu projeto ou ideia...',
         'contact.info.title': 'Informações de Contato',
-        'contact.info.email': 'arturpvguerra@gmail.com',
+        'contact.info.email': 'contato@arturguerra.com',
         'contact.info.phone': '+55 (22) 99971-4055',
         'contact.info.location': 'Nova Friburgo, RJ - Brasil',
         
@@ -199,7 +199,7 @@ class LanguageSystem {
         'contact.form.subject.placeholder': 'What\'s the subject?',
         'contact.form.message.placeholder': 'Describe your project or idea...',
         'contact.info.title': 'Contact Information',
-        'contact.info.email': 'arturpvguerra@gmail.com',
+        'contact.info.email': 'contato@arturguerra.com',
         'contact.info.phone': '+55 (22) 99971-4055',
         'contact.info.location': 'Nova Friburgo, RJ - Brazil',
         
