@@ -1,54 +1,410 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Design tokens — "Aurora Noir"
+   ============================================================ */
 :root {
-  --background: #0A0A0F;
-  --foreground: #F8FAFC;
-  --muted: #8A8F98;
-  --accent: #6366F1;
-  --accent-hover: #818CF8;
-  --surface: rgba(255, 255, 255, 0.03);
-  --surface-hover: rgba(255, 255, 255, 0.06);
-  --border: rgba(255, 255, 255, 0.08);
-  --glow: rgba(99, 102, 241, 0.15);
+  /* Canvas */
+  --background: #05060a;
+  --background-soft: #090b12;
+  --foreground: #edeef4;
+  --muted: #8b90a3;
+  --muted-soft: #5f6474;
+
+  /* Accents */
+  --accent: #6d5ef8;
+  --accent-hover: #8b7cff;
+  --accent-2: #b45cf5;
+  --accent-3: #2dd4d4;
+  --accent-warm: #f59e6b;
+
+  /* Surfaces */
+  --surface: rgba(255, 255, 255, 0.025);
+  --surface-hover: rgba(255, 255, 255, 0.05);
+  --surface-strong: rgba(255, 255, 255, 0.07);
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --glow: rgba(109, 94, 248, 0.16);
+
+  /* Rhythm */
+  --section-y: clamp(6rem, 12vw, 11rem);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-soft: var(--background-soft);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-muted-soft: var(--muted-soft);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-accent-warm: var(--accent-warm);
   --color-surface: var(--surface);
   --color-surface-hover: var(--surface-hover);
+  --color-surface-strong: var(--surface-strong);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-glow: var(--glow);
   --font-sans: var(--font-inter);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-jetbrains);
+  --font-serif: var(--font-instrument);
 }
 
+/* ============================================================
+   Base
+   ============================================================ */
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  /* Nav offset for anchor jumps */
+  scroll-padding-top: 6rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   overflow-x: hidden;
   width: 100%;
   min-width: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: rgba(99, 102, 241, 0.3);
+  background: rgba(109, 94, 248, 0.35);
   color: #fff;
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent), var(--accent-2));
+  border: 3px solid var(--background);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--accent-hover), var(--accent-2));
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+
+/* Iridescent text */
+.text-gradient {
+  background: linear-gradient(
+    100deg,
+    #c7c9ff 0%,
+    var(--accent-hover) 30%,
+    var(--accent-2) 55%,
+    var(--accent-3) 80%,
+    #c7c9ff 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 9s linear infinite;
+}
+
+@keyframes gradient-pan {
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.text-shine {
+  background: linear-gradient(
+    100deg,
+    var(--muted) 0%,
+    var(--foreground) 45%,
+    var(--muted) 90%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 6s linear infinite;
+}
+
+/* Glass panel */
+.glass {
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.015)
+  );
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid var(--border);
+}
+
+/* Hairline gradient border via mask */
+.hairline {
+  position: relative;
+}
+.hairline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0.02) 35%,
+    rgba(255, 255, 255, 0.02) 65%,
+    rgba(139, 124, 255, 0.28)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Film grain overlay */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 8s steps(6) infinite;
+}
+
+@keyframes grain-shift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  16% {
+    transform: translate(-2%, 1%);
+  }
+  33% {
+    transform: translate(1%, -2%);
+  }
+  50% {
+    transform: translate(-1%, 2%);
+  }
+  66% {
+    transform: translate(2%, 1%);
+  }
+  83% {
+    transform: translate(1%, 2%);
+  }
+}
+
+/* Dot / line grids */
+.bg-dot-grid {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.4) 1px,
+    transparent 1px
+  );
+  background-size: 34px 34px;
+}
+
+.bg-line-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* Radial fade mask (for grids / edges) */
+.mask-radial {
+  -webkit-mask-image: radial-gradient(
+    ellipse 65% 55% at 50% 45%,
+    #000 30%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(
+    ellipse 65% 55% at 50% 45%,
+    #000 30%,
+    transparent 75%
+  );
+}
+
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+.mask-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+
+/* Infinite marquee */
+.marquee-track {
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+.marquee-track-reverse {
+  animation: marquee var(--marquee-duration, 40s) linear infinite reverse;
+}
+.marquee-wrap:hover .marquee-track,
+.marquee-wrap:hover .marquee-track-reverse {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Conic spinning border (premium card ring) */
+@property --ring-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.conic-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--ring-angle, 0deg),
+    transparent 0deg,
+    var(--accent) 60deg,
+    var(--accent-3) 120deg,
+    transparent 200deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  animation: ring-spin 4s linear infinite;
+}
+.conic-ring:hover::before {
+  opacity: 1;
+}
+
+@keyframes ring-spin {
+  to {
+    --ring-angle: 360deg;
+  }
+}
+
+/* Aurora blobs */
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+  animation: drift 22s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -6%, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(-5%, 5%, 0) scale(0.94);
+  }
+}
+
+/* 3D helpers */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Pulsing availability dot */
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse-ring 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   Motion preferences
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .grain::after {
+    display: none;
   }
 }

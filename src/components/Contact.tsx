@@ -1,93 +1,158 @@
 "use client";
 
-import { AnimatedSection } from "./ui/AnimatedSection";
-import { SectionHeader } from "./ui/SectionHeader";
-import { Mail, ArrowUpRight } from "lucide-react";
-
-function GithubIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-    </svg>
-  );
-}
-
-function LinkedinIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
-  );
-}
-
-interface ContactProps {
-  label: string;
-  title: string;
-  subtitle: string;
-  email: string;
-  cta: string;
-  github: string;
-  linkedin: string;
-}
+import { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, Check, Copy, Download, Mail } from "lucide-react";
+import type { Locale, Translations } from "@/lib/i18n";
+import { CV, SOCIALS } from "@/lib/site";
+import { Reveal } from "./ui/Reveal";
+import { SectionHeading } from "./ui/SectionHeading";
+import { Magnetic } from "./ui/Magnetic";
+import { GithubIcon, LinkedinIcon } from "./ui/BrandIcons";
 
 export function Contact({
-  label,
-  title,
-  subtitle,
-  email,
-  cta,
-  github,
-  linkedin,
-}: ContactProps) {
+  t,
+  locale,
+}: {
+  t: Translations["contact"];
+  locale: Locale;
+}) {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(t.email);
+      setCopied(true);
+    } catch {
+      // Clipboard unavailable (insecure context) — the mailto link still works.
+    }
+  }, [t.email]);
+
+  useEffect(() => {
+    if (!copied) return;
+    const id = window.setTimeout(() => setCopied(false), 2000);
+    return () => window.clearTimeout(id);
+  }, [copied]);
+
   return (
-    <section id="contact" className="relative overflow-hidden px-6 py-32">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute bottom-0 left-1/2 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-indigo-500/[0.05] blur-[120px]" />
-      </div>
+    <section
+      id="contact"
+      className="relative overflow-hidden px-6"
+      style={{ paddingBlock: "var(--section-y)" }}
+    >
+      <div
+        aria-hidden
+        className="aurora-blob left-1/2 bottom-0 h-[560px] w-[720px] -translate-x-1/2 translate-y-1/3"
+        style={{ background: "rgba(109,94,248,0.11)" }}
+      />
+      <div
+        aria-hidden
+        className="bg-dot-grid mask-radial pointer-events-none absolute inset-0 opacity-[0.04]"
+      />
 
       <div className="relative mx-auto max-w-3xl text-center">
-        <SectionHeader label={label} title={title} subtitle={subtitle} />
+        <SectionHeading label={t.label} title={t.title} subtitle={t.subtitle} />
 
-        <AnimatedSection delay={0.2}>
-          <a
-            href={`mailto:${email}`}
-            className="group inline-flex items-center gap-2 rounded-xl bg-accent px-8 py-4 text-base font-semibold text-white shadow-lg shadow-accent/20 transition-all duration-200 hover:bg-accent-hover hover:shadow-accent/30"
+        {/* Primary CTA */}
+        <Reveal delay={0.1}>
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Magnetic strength={12}>
+              <a
+                href={`mailto:${t.email}`}
+                className="group relative flex items-center gap-2.5 overflow-hidden rounded-2xl bg-gradient-to-r from-accent to-accent-2 px-8 py-4 text-base font-semibold text-white shadow-[0_12px_50px_-14px_rgba(109,94,248,0.95)] transition-shadow duration-300 hover:shadow-[0_16px_60px_-12px_rgba(139,124,255,1)]"
+              >
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                <Mail className="relative h-[18px] w-[18px]" />
+                <span className="relative">{t.cta}</span>
+                <ArrowUpRight className="relative h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            </Magnetic>
+
+            <Magnetic strength={8}>
+              <a
+                href={CV[locale]}
+                download
+                className="glass hairline flex items-center gap-2 rounded-2xl px-6 py-4 text-sm font-semibold text-muted transition-colors duration-300 hover:text-foreground"
+              >
+                <Download className="h-4 w-4" />
+                {t.resume}
+              </a>
+            </Magnetic>
+          </div>
+        </Reveal>
+
+        {/* Email + copy */}
+        <Reveal delay={0.2} className="relative mt-8">
+          <button
+            onClick={copyEmail}
+            className="group inline-flex items-center gap-2.5 rounded-xl border border-border px-4 py-2 font-mono text-[13px] text-muted transition-colors duration-300 hover:border-border-strong hover:text-foreground"
+            aria-label={t.copy}
           >
-            <Mail className="h-5 w-5" />
-            {cta}
-            <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </a>
-        </AnimatedSection>
+            {t.email}
+            <span className="relative flex h-3.5 w-3.5 items-center justify-center">
+              <AnimatePresence mode="wait" initial={false}>
+                {copied ? (
+                  <motion.span
+                    key="check"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.5, opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className="absolute"
+                  >
+                    <Check className="h-3.5 w-3.5 text-emerald-400" />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="copy"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.5, opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className="absolute"
+                  >
+                    <Copy className="h-3.5 w-3.5 opacity-50 transition-opacity group-hover:opacity-100" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </span>
+          </button>
+          <span
+            aria-live="polite"
+            className={`pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 font-mono text-[11px] uppercase tracking-wider text-emerald-400 transition-opacity duration-300 ${
+              copied ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {t.copied}
+          </span>
+        </Reveal>
 
-        <AnimatedSection delay={0.3}>
+        {/* Socials */}
+        <Reveal delay={0.3}>
           <div className="mt-10 flex items-center justify-center gap-6">
             <a
-              href="https://github.com/ehoguerra"
+              href={SOCIALS.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+              className="group flex items-center gap-2 text-sm text-muted transition-colors duration-300 hover:text-foreground"
             >
-              <GithubIcon className="h-5 w-5" />
-              {github}
-              <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
+              <GithubIcon className="h-[18px] w-[18px]" />
+              {t.github}
+              <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </a>
-            <span className="h-4 w-px bg-border" />
+            <span aria-hidden className="h-4 w-px bg-border-strong" />
             <a
-              href="https://www.linkedin.com/in/artur-guerra-dev/"
+              href={SOCIALS.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+              className="group flex items-center gap-2 text-sm text-muted transition-colors duration-300 hover:text-foreground"
             >
-              <LinkedinIcon className="h-5 w-5" />
-              {linkedin}
-              <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
+              <LinkedinIcon className="h-[18px] w-[18px]" />
+              {t.linkedin}
+              <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </a>
           </div>
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.4}>
-          <p className="mt-8 text-sm text-muted/60">{email}</p>
-        </AnimatedSection>
+        </Reveal>
       </div>
     </section>
   );

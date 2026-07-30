@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -9,20 +9,36 @@ const inter = Inter({
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-geist-mono",
+  variable: "--font-jetbrains",
   subsets: ["latin"],
   display: "swap",
 });
 
-export const viewport = {
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const SITE_URL = "https://ehoguerra.github.io";
+const TITLE = "Artur Guerra — Full Stack Developer & Product Builder";
+const DESCRIPTION =
+  "Full Stack Developer building real products end to end — multi-tenant SaaS, healthtech and automation platforms with AI integrated into every layer.";
+
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#05060a",
+  colorScheme: "dark",
 };
 
 export const metadata: Metadata = {
-  title: "Artur Guerra — Full Stack Developer & Product Builder",
-  description:
-    "Full Stack Developer building real products end-to-end with AI, automation, and intelligent integrations. Specializing in SaaS, healthtech, and enterprise systems.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  applicationName: "Artur Guerra — Portfolio",
   keywords: [
     "Full Stack Developer",
     "Product Builder",
@@ -33,14 +49,45 @@ export const metadata: Metadata = {
     "React",
     "Next.js",
     "TypeScript",
+    "Artur Guerra",
   ],
-  authors: [{ name: "Artur Guerra" }],
+  authors: [{ name: "Artur Guerra", url: SITE_URL }],
+  creator: "Artur Guerra",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Artur Guerra — Full Stack Developer & Product Builder",
-    description:
-      "Building real products end-to-end with AI, automation, and intelligent integrations.",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: "Artur Guerra",
     type: "website",
+    locale: "en_US",
+    alternateLocale: ["pt_BR"],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
+};
+
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Artur Guerra",
+  url: SITE_URL,
+  jobTitle: "Full Stack Developer & Product Builder",
+  email: "mailto:arturpvguerra@gmail.com",
+  sameAs: [
+    "https://github.com/ehoguerra",
+    "https://www.linkedin.com/in/artur-guerra-dev/",
+  ],
+  knowsAbout: [
+    "Full Stack Development",
+    "Systems Architecture",
+    "Applied AI",
+    "Multi-tenant SaaS",
+  ],
 };
 
 export default function RootLayout({
@@ -51,9 +98,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-full w-full flex flex-col overflow-x-hidden bg-[#0A0A0F] text-foreground">
+      <body className="flex min-h-full w-full flex-col overflow-x-hidden bg-background text-foreground">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+        />
         {children}
       </body>
     </html>

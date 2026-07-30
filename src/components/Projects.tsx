@@ -1,133 +1,298 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useRef, useCallback } from "react";
-import { AnimatedSection } from "./ui/AnimatedSection";
-import { SectionHeader } from "./ui/SectionHeader";
-import { Badge } from "./ui/Badge";
-import { Sparkles, ExternalLink } from "lucide-react";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight, Lock, Sparkles } from "lucide-react";
+import type { Translations } from "@/lib/i18n";
+import { PROJECTS, type ProjectMeta } from "@/lib/site";
+import { Reveal, RevealItem, Stagger } from "./ui/Reveal";
+import { SectionHeading } from "./ui/SectionHeading";
+import { TiltCard } from "./ui/TiltCard";
+import { GithubIcon } from "./ui/BrandIcons";
 
-interface ProjectItem {
-  readonly title: string;
-  readonly domain: string;
-  readonly description: string;
-  readonly stack: readonly string[];
-  readonly highlights: readonly string[];
-  readonly role: string;
-  readonly ai: boolean;
-}
+/* ------------------------------------------------------------------ */
+/* Generated cover art                                                 */
+/* ------------------------------------------------------------------ */
 
-interface ProjectsProps {
-  label: string;
-  title: string;
-  items: readonly ProjectItem[];
-}
-
-function ProjectCardWrapper({ children }: { children: React.ReactNode }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!cardRef.current || !glowRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    glowRef.current.style.background = `radial-gradient(500px circle at ${x}px ${y}px, rgba(99, 102, 241, 0.06), transparent 40%)`;
-  }, []);
+/**
+ * Each project gets a deterministic abstract cover built from its two hues:
+ * stacked glass planes in perspective over a gradient field. No screenshots
+ * needed, and every card stays visually distinct.
+ */
+function ProjectVisual({
+  meta,
+  index,
+}: {
+  meta: ProjectMeta;
+  index: string;
+}) {
+  const [a, b] = meta.hues;
 
   return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      whileHover={{ y: -4, scale: 1.005 }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-colors duration-300 hover:border-accent/20"
-    >
+    <div className="perspective-1000 relative aspect-[4/3] w-full overflow-hidden rounded-3xl sm:aspect-[16/11]">
+      {/* Gradient field */}
       <div
-        ref={glowRef}
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(120% 120% at 20% 15%, ${a}33 0%, transparent 55%), radial-gradient(120% 120% at 85% 85%, ${b}38 0%, transparent 55%), linear-gradient(160deg, #0b0d16 0%, #06070c 100%)`,
+        }}
       />
-      <div className="pointer-events-none absolute -bottom-px left-1/2 h-px w-1/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-accent/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      {children}
-    </motion.div>
+
+      {/* Grid */}
+      <div
+        aria-hidden
+        className="bg-line-grid absolute inset-0 opacity-[0.07]"
+        style={{ backgroundSize: "44px 44px" }}
+      />
+
+      {/* Floating planes */}
+      <div className="preserve-3d absolute inset-0 grid place-items-center">
+        <div
+          className="preserve-3d relative h-[62%] w-[68%]"
+          style={{ transform: "rotateX(46deg) rotateZ(-32deg)" }}
+        >
+          {[0, 1, 2].map((layer) => (
+            <div
+              key={layer}
+              className="absolute inset-0 rounded-xl border"
+              style={{
+                transform: `translateZ(${layer * 26}px)`,
+                borderColor: `${layer === 2 ? a : b}55`,
+                background: `linear-gradient(135deg, ${layer === 2 ? a : b}1f, transparent 70%)`,
+                boxShadow: `0 18px 60px -22px ${a}88`,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Index watermark */}
+      <span
+        aria-hidden
+        className="absolute bottom-3 right-5 font-mono text-[5rem] font-bold leading-none tracking-tighter text-white/[0.045] sm:text-[7rem]"
+      >
+        {index}
+      </span>
+
+      {/* Sheen */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10"
+      />
+    </div>
   );
 }
 
-export function Projects({ label, title, items }: ProjectsProps) {
+/* ------------------------------------------------------------------ */
+/* Row                                                                 */
+/* ------------------------------------------------------------------ */
+
+function ProjectRow({
+  meta,
+  copy,
+  labels,
+  flip,
+}: {
+  meta: ProjectMeta;
+  copy: Translations["projects"]["items"][keyof Translations["projects"]["items"]];
+  labels: Translations["projects"];
+  flip: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [42, -42]);
+
   return (
-    <section id="projects" className="relative overflow-hidden px-6 py-32">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-0 top-1/4 h-[500px] w-[500px] rounded-full bg-indigo-500/[0.03] blur-[120px]" />
-        <div className="absolute right-0 bottom-1/4 h-[400px] w-[400px] rounded-full bg-violet-500/[0.03] blur-[100px]" />
+    <div
+      ref={ref}
+      className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14"
+    >
+      {/* Visual */}
+      <Reveal
+        from={flip ? "right" : "left"}
+        distance={40}
+        className={flip ? "lg:order-2" : ""}
+      >
+        <motion.div style={reduced ? undefined : { y }}>
+          <TiltCard
+            intensity={6}
+            glow={`${meta.hues[0]}22`}
+            className="rounded-3xl"
+          >
+            <ProjectVisual meta={meta} index={meta.index} />
+          </TiltCard>
+        </motion.div>
+      </Reveal>
+
+      {/* Content */}
+      <div className={flip ? "lg:order-1" : ""}>
+        <Stagger gap={0.07}>
+          <RevealItem>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="font-mono text-[11px] tracking-[0.2em] text-muted-soft">
+                {meta.index}
+              </span>
+              <span className="h-px w-6 bg-border-strong" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                {copy.domain}
+              </span>
+              {meta.ai && (
+                <span className="inline-flex items-center gap-1 rounded-md border border-accent/30 bg-accent/10 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-accent-hover">
+                  <Sparkles className="h-3 w-3" />
+                  AI
+                </span>
+              )}
+            </div>
+          </RevealItem>
+
+          <RevealItem>
+            <h3 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+              {copy.title}
+            </h3>
+          </RevealItem>
+
+          <RevealItem>
+            <p className="mt-4 text-pretty text-[15px] leading-relaxed text-muted">
+              {copy.description}
+            </p>
+          </RevealItem>
+
+          {/* Metrics */}
+          {copy.metrics.length > 0 && (
+            <RevealItem>
+              <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
+                {copy.metrics.map((metric) => (
+                  <div key={metric.label}>
+                    <div
+                      className="text-2xl font-semibold tracking-tight"
+                      style={{ color: meta.hues[0] }}
+                    >
+                      {metric.value}
+                    </div>
+                    <div className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-soft">
+                      {metric.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </RevealItem>
+          )}
+
+          {/* Highlights */}
+          <RevealItem>
+            <ul className="mt-6 space-y-2">
+              {copy.highlights.map((highlight) => (
+                <li
+                  key={highlight}
+                  className="flex items-start gap-2.5 text-sm leading-relaxed text-muted/85"
+                >
+                  <span
+                    aria-hidden
+                    className="mt-[7px] h-1 w-1 flex-shrink-0 rounded-full"
+                    style={{ background: meta.hues[1] }}
+                  />
+                  {highlight}
+                </li>
+              ))}
+            </ul>
+          </RevealItem>
+
+          {/* Stack */}
+          <RevealItem>
+            <div className="mt-6 flex flex-wrap gap-1.5">
+              {meta.stack.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-lg border border-border bg-surface px-2.5 py-1 font-mono text-[10.5px] tracking-wide text-muted transition-colors duration-300 hover:border-border-strong hover:text-foreground"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </RevealItem>
+
+          {/* Footer: role + links */}
+          <RevealItem>
+            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-border pt-5">
+              <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-soft">
+                {labels.roleLabel} · {copy.role}
+              </span>
+
+              <span className="flex flex-wrap items-center gap-4">
+                {meta.live && (
+                  <a
+                    href={meta.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1.5 text-sm font-medium text-foreground"
+                  >
+                    {labels.viewLive}
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                )}
+                {meta.repo ? (
+                  <a
+                    href={meta.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-foreground"
+                  >
+                    <GithubIcon className="h-3.5 w-3.5" />
+                    {labels.viewCode}
+                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:opacity-100" />
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-soft">
+                    <Lock className="h-3 w-3" />
+                    {labels.privateRepo}
+                  </span>
+                )}
+              </span>
+            </div>
+          </RevealItem>
+        </Stagger>
       </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Section                                                             */
+/* ------------------------------------------------------------------ */
+
+export function Projects({ t }: { t: Translations["projects"] }) {
+  return (
+    <section
+      id="work"
+      className="relative px-6"
+      style={{ paddingBlock: "var(--section-y)" }}
+    >
+      <div
+        aria-hidden
+        className="aurora-blob right-[-8%] top-[12%] h-[500px] w-[500px]"
+        style={{ background: "rgba(180,92,245,0.06)" }}
+      />
 
       <div className="relative mx-auto max-w-6xl">
-        <SectionHeader label={label} title={title} />
+        <SectionHeading label={t.label} title={t.title} subtitle={t.subtitle} />
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          {items.map((project, i) => (
-            <AnimatedSection key={project.title} delay={i * 0.1}>
-              <ProjectCardWrapper>
-                {/* Header */}
-                <div className="border-b border-border p-6">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-xl font-bold text-foreground">
-                          {project.title}
-                        </h3>
-                        {project.ai && (
-                          <span className="inline-flex items-center gap-1 rounded-md border border-accent/30 bg-accent/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
-                            <Sparkles className="h-3 w-3" />
-                            AI
-                          </span>
-                        )}
-                      </div>
-                      <p className="mt-1 text-sm text-muted">{project.domain}</p>
-                    </div>
-                    <ExternalLink className="h-4 w-4 text-muted/50 transition-colors group-hover:text-accent" />
-                  </div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">
-                    {project.description}
-                  </p>
-                </div>
-
-                {/* Body */}
-                <div className="flex flex-1 flex-col p-6">
-                  <div className="mb-4">
-                    <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted/70">
-                      Stack
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.stack.map((tech) => (
-                        <Badge key={tech}>{tech}</Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mb-4 flex-1">
-                    <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted/70">
-                      Highlights
-                    </p>
-                    <ul className="space-y-1.5">
-                      {project.highlights.map((h) => (
-                        <li
-                          key={h}
-                          className="flex items-start gap-2 text-sm text-muted"
-                        >
-                          <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-accent" />
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="mt-auto border-t border-border pt-4">
-                    <p className="text-xs text-muted/70">{project.role}</p>
-                  </div>
-                </div>
-              </ProjectCardWrapper>
-            </AnimatedSection>
+        <div className="space-y-24 sm:space-y-32">
+          {PROJECTS.map((meta, i) => (
+            <ProjectRow
+              key={meta.id}
+              meta={meta}
+              copy={t.items[meta.id]}
+              labels={t}
+              flip={i % 2 === 1}
+            />
           ))}
         </div>
       </div>
