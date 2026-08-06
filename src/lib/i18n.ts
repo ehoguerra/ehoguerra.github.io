@@ -390,6 +390,8 @@ const en = {
     built: "Built with Next.js, TypeScript, Tailwind & WebGL",
     rights: "All rights reserved.",
     backToTop: "Back to top",
+    company:
+      "Artur Guerra Desenvolvimento de Software LTDA · CNPJ 67.557.039/0001-85 · Brazil",
   },
 };
 
@@ -816,6 +818,8 @@ const pt: Translations = {
     built: "Construído com Next.js, TypeScript, Tailwind & WebGL",
     rights: "Todos os direitos reservados.",
     backToTop: "Voltar ao topo",
+    company:
+      "Artur Guerra Desenvolvimento de Software LTDA · CNPJ 67.557.039/0001-85 · Brasil",
   },
 };
 
