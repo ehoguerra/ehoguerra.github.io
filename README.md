@@ -8,7 +8,8 @@ Dois ecommerces exclusivamente frontend para o portfólio de Artur Guerra.
 Cada pasta é um projeto Vite independente. Consulte o README de cada loja para executar, compilar e publicar na Vercel.
 
 Demos publicadas:
-- https://ehoguerra-github-io.vercel.app/showcase/forma/index.html
-- https://ehoguerra-github-io.vercel.app/showcase/volt/index.html
+- https://ehoguerra-github-io.vercel.app/showcase/forma
+- https://ehoguerra-github-io.vercel.app/showcase/volt
 
 Catálogo, marcas, preços e condições fictícios. O checkout não realiza transações.
+
