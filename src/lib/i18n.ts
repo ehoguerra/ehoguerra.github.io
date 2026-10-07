@@ -1,146 +1,147 @@
-import type { ExperienceId, PipelineId, ProjectId, RepoId } from "./site";
+import type { ExperienceId, ProjectId, RepoId, StationId } from "./site";
 
 export type Locale = "en" | "pt";
 
 const en = {
+  meta: {
+    skip: "Skip to content",
+    home: "Artur Guerra, back to top",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    language: "Language",
+  },
+
   nav: {
-    about: "About",
+    line: "Process",
     work: "Work",
-    ai: "AI",
-    open: "Open Source",
+    record: "Experience",
+    open: "Open source",
     contact: "Contact",
-    resume: "Résumé",
+    cv: "CV",
   },
 
   hero: {
-    availability: "Available for new projects",
-    greeting: "Artur Guerra",
-    roles: [
-      "Full Stack Developer",
-      "Product Builder",
-      "Applied AI Engineer",
-      "Systems Architect",
-    ],
-    headlineLead: "I build",
-    headlineAccent: "real products",
-    headlineTail: "end to end.",
-    subtitle:
-      "From architecture to deployment — multi-tenant SaaS, healthtech and automation platforms with AI woven into every layer. Not demos. Production.",
-    cta: "Explore the work",
-    contact: "Get in touch",
-    resume: "Download CV",
-    scroll: "Scroll",
+    title: "I build real products end to end.",
+    lead: "Full stack developer and AI engineer. Multi-tenant SaaS, healthtech and LLM systems, from the first architecture sketch to the deploy, with AI wired into every layer. Not demos. Production.",
+    primary: "Start a project",
+    secondary: "Download CV",
+    status: "Available for new projects",
+    place: "Nova Friburgo, Brazil · remote",
+    scroll: "Scroll to run the line",
   },
 
-  about: {
-    label: "About",
-    title: "Engineering meets product vision",
-    lead: "I don't just write code — I ship products.",
-    p1: "I'm a Full Stack Developer and Information Systems student at CEFET/RJ, focused on building complete systems that solve real business problems. Currently a Full Stack Development Intern at Visol, working with PHP and Angular, where I integrated the franchise hub with the company's core platform.",
-    p2: "Every project I take on is approached with a product mindset: understanding the domain, designing for scale, and shipping features that create real impact. I've built multi-tenant SaaS platforms, healthcare systems, sports management tools, and gaming platforms — all from scratch.",
-    p3: "What sets me apart is the practical integration of AI into real systems: OCR pipelines, multi-provider LLM chains with fallback, intelligent agents, and automated workflows that run in production.",
-    stats: [
-      { value: "6", suffix: "+", label: "Products shipped" },
-      { value: "83", suffix: "k+", label: "Lines in one platform" },
-      { value: "5", suffix: "", label: "Industries served" },
-      { value: "3", suffix: "", label: "LLM providers in prod" },
-    ],
+  line: {
+    title: "How a product gets built here",
+    lead: "Every product goes down the same line: seven stations, one builder, nothing handed off. Keep scrolling and watch one come together.",
+    station: "Station",
+    of: "of",
+    tools: "Tools at this station",
+    position: "Position on the line",
+    stations: {
+      architecture: {
+        title: "Architecture",
+        body: "Every build starts with the domain, not the framework. I map the business into modules, tenants and permissions, then set the boundaries that keep a codebase changeable past 80,000 lines.",
+        proof: {
+          value: "34",
+          label: "modules in one multi-tenant platform",
+          source: "EvoSolar Franquias · 83k+ lines",
+        },
+      },
+      data: {
+        title: "Data",
+        body: "PostgreSQL as the source of truth, Redis where speed matters, and access rules designed into the model from the first migration, so permissions never become an afterthought.",
+        proof: {
+          value: "6",
+          label: "role levels, from admin to doctor and coach",
+          source: "BR1 Sports Academy",
+        },
+      },
+      api: {
+        title: "API & workers",
+        body: "Async FastAPI services, plus background workers that keep going when nobody is watching: schedules, retries, webhooks and real-time chat.",
+        proof: {
+          value: "38",
+          label: "API endpoints across 15 service domains",
+          source: "Zelo App",
+        },
+      },
+      intelligence: {
+        title: "Intelligence",
+        body: "AI wired in as a system component, not bolted on as a demo: multi-provider LLM chains with automatic fallback, OCR pipelines and agents that call real tools.",
+        proof: {
+          value: "3",
+          label: "LLM providers in production, with automatic fallback",
+          source: "Vivi AI · Zelo App",
+        },
+      },
+      interface: {
+        title: "Interface",
+        body: "Web and mobile front ends people use every day: React and Next.js on the web, React Native and Expo on phones, Angular and Ionic where the platform already lives.",
+        proof: {
+          value: "2",
+          label: "client apps served by one AI backend",
+          source: "Vivi AI · Angular web and Ionic mobile",
+        },
+      },
+      quality: {
+        title: "Quality gate",
+        body: "Nothing leaves without passing the gate: automated test suites, CI on every push, retries with backoff, and security reviews against OWASP.",
+        proof: {
+          value: "1,900+",
+          label: "automated tests, 99.9% passing",
+          source: "Vivi AI",
+        },
+      },
+      ship: {
+        title: "Ship",
+        body: "Containerised with Docker and deployed through CI to the cloud. Then the next product goes on the line.",
+        proof: {
+          value: "7",
+          label: "products built and shipped end to end",
+          source: "Listed below",
+        },
+      },
+    } satisfies Record<StationId, StationCopy>,
   },
 
-  experience: {
-    label: "Trajectory",
-    title: "Where I've been building",
+  shipped: {
+    title: "Off the line",
+    lead: "Seven systems designed, built and shipped, most of them solo, from the first migration to the last deploy.",
+    role: "Role",
+    stack: "Stack",
+    manifest: "Full manifest",
+    production: "Running in production",
+    live: "Open the live product",
+    docs: "Read the public docs",
+    privateCode: "Private codebase",
     items: {
-      visol: {
-        role: "Full Stack Development Intern",
-        org: "Visol",
-        period: "Current",
+      vivi: {
+        title: "Vivi AI",
+        sector: "AI assistant · Solar-energy SaaS",
         description:
-          "Building with PHP and Angular on the company's core platform, where I integrated the franchise hub with the main system.",
+          "Visol's production conversational assistant. A Python/FastAPI microservice that orchestrates OpenAI, Claude and Gemini with automatic fallback, runs an intent-handling agent with tool use and guides onboarding through a state machine, serving the company's Angular web app and Ionic mobile app.",
+        highlights: [
+          "Multi-provider LLM orchestration with automatic fallback",
+          "Intent-handling agent with tool use and multi-turn memory",
+          "State-machine guided onboarding",
+          "Retry and backoff with Tenacity, plus a permission layer over Visol's licensing model",
+          "CI/CD on GitHub Actions",
+        ],
+        metrics: [
+          { value: "1,900+", label: "automated tests" },
+          { value: "99.9%", label: "pass rate" },
+          { value: "3", label: "LLM providers" },
+        ],
+        role: "Designed and built it at Visol",
       },
-      founder: {
-        role: "Solo Creator & Developer",
-        org: "EvoSolar Franquias · Zelo App · Fantasy Picks",
-        period: "Ongoing",
-        description:
-          "Designing, building and operating full SaaS products end to end — architecture, backend, mobile, AI integration and infrastructure.",
-      },
-      cefet: {
-        role: "BSc Information Systems",
-        org: "CEFET/RJ",
-        period: "In progress",
-        description:
-          "Systems architecture, databases, distributed computing and software engineering fundamentals.",
-      },
-      freelance: {
-        role: "Freelance Developer",
-        org: "Pecci Cuidado Integrado",
-        period: "Delivered",
-        description:
-          "Clinical management platform for an integrated care clinic — deployed and running in production.",
-      },
-    } satisfies Record<ExperienceId, ExperienceCopy>,
-  },
-
-  specialties: {
-    label: "Capabilities",
-    title: "What I build",
-    subtitle:
-      "Six disciplines that compound into complete, production-grade products.",
-    items: [
-      {
-        title: "Full Stack Engineering",
-        description:
-          "End-to-end development with Python, FastAPI, Flask, React, Next.js and TypeScript. From database design to responsive UIs.",
-      },
-      {
-        title: "Systems Architecture",
-        description:
-          "Multi-tenant SaaS, Clean Architecture, async-first backends, role-based access control and production infrastructure with Docker.",
-      },
-      {
-        title: "Applied AI",
-        description:
-          "Multi-provider LLM integration (OpenAI, Claude, Gemini) with fallback chains, OCR pipelines and AI-powered data extraction in production systems.",
-      },
-      {
-        title: "Agents & Automation",
-        description:
-          "Celery-driven background jobs, scheduled tasks, real-time sync pipelines, push notification systems and workflow orchestration.",
-      },
-      {
-        title: "API & Integrations",
-        description:
-          "Google Ads, Meta Graph API, Firebase, OneSignal, football-data.org, SharePoint, ANVISA — deep third-party integration experience.",
-      },
-      {
-        title: "SaaS & Product",
-        description:
-          "From MVP to production: multi-tenant architectures, payment flows, analytics dashboards, onboarding systems and retention mechanics.",
-      },
-    ],
-  },
-
-  projects: {
-    label: "Selected work",
-    title: "Products I've shipped",
-    subtitle:
-      "Real systems running in production — built solo, from the first migration to the last deploy.",
-    stackLabel: "Stack",
-    highlightsLabel: "Highlights",
-    roleLabel: "Role",
-    viewCode: "View code",
-    viewLive: "Live site",
-    privateRepo: "Private repository",
-    items: {
       evosolar: {
         title: "EvoSolar Franquias",
-        domain: "Solar Energy · SaaS",
+        sector: "Solar energy · SaaS",
         description:
           "Multi-tenant franchise management platform for solar energy companies. Handles onboarding, KPI tracking, royalty calculations, ad campaigns and internal communication across franchise units.",
         highlights: [
           "34 backend modules with 83k+ lines of code",
-          "Google Ads & Meta API integration with OAuth",
+          "Google Ads and Meta API integration over OAuth",
           "Google Gemini agents for conversational intelligence",
           "WebSocket real-time chat with SLA tracking",
           "Automated royalty calculations and financial sync",
@@ -150,18 +151,18 @@ const en = {
           { value: "83k+", label: "lines of code" },
           { value: "2", label: "ad platforms" },
         ],
-        role: "Solo Creator & Developer",
+        role: "Solo creator and developer",
       },
       zelo: {
         title: "Zelo App",
-        domain: "HealthTech · SaaS",
+        sector: "Healthtech · SaaS",
         description:
-          "Medication management platform for families with elderly and chronic patients. Centralizes drug scheduling, caregiver coordination, dose tracking, stock management and adherence analytics.",
+          "Medication management for families caring for elderly and chronic patients. Centralises drug schedules, caregiver coordination, dose tracking, stock and adherence analytics.",
         highlights: [
           "Multi-provider AI chain (OpenAI, Claude, Gemini) with automatic fallback",
-          "OCR medication extraction enriched with the ANVISA drug catalog",
+          "OCR medication extraction enriched with the ANVISA drug catalogue",
           "Timezone-aware scheduling for multi-caregiver coordination",
-          "38 specialized API endpoints across 15 service domains",
+          "38 specialised API endpoints across 15 service domains",
           "LGPD compliance architecture with encryption and audit trails",
         ],
         metrics: [
@@ -169,87 +170,107 @@ const en = {
           { value: "15", label: "service domains" },
           { value: "3", label: "LLM providers" },
         ],
-        role: "Solo Creator & Developer",
+        role: "Solo creator and developer",
       },
       fantasy: {
         title: "Fantasy Picks",
-        domain: "Sports & Gaming · SaaS",
+        sector: "Sports & gaming · SaaS",
         description:
-          "Fantasy sports platform with survivor-style pick mechanics. Users buy picks to enter real football championships, select teams weekly and compete for prizes based on match results.",
+          "Fantasy sports with survivor-style pick mechanics. Players buy picks to enter real football championships, choose teams each round and compete for prizes on real match results.",
         highlights: [
           "Async-first architecture with asyncpg for high concurrency",
-          "Pick lineage tracking with complex business rule validation",
+          "Pick lineage tracking with complex business-rule validation",
           "football-data.org integration across 12+ leagues",
-          "Dual-balance wallet system (picks + prize BRL)",
-          "Clean Architecture with repository pattern and service layers",
+          "Dual-balance wallet (picks and prize money in BRL)",
+          "Clean Architecture with repositories and service layers",
         ],
         metrics: [
           { value: "12+", label: "leagues covered" },
           { value: "2", label: "wallet balances" },
           { value: "100%", label: "async I/O" },
         ],
-        role: "Solo Creator & Developer",
+        role: "Solo creator and developer",
       },
       br1: {
         title: "BR1 Sports Academy",
-        domain: "Sports Management",
+        sector: "Sports management",
         description:
-          "Sports academy management system handling the complete lifecycle of young athletes — from initial interest through advanced training with multi-role staff coordination.",
+          "Academy management for young athletes, covering the whole lifecycle from first interest to advanced training, with coaches, doctors and psychologists working in one system.",
         highlights: [
           "Six-level role-based access (admin, coach, doctor, psychologist, trainer)",
-          "Automated PDF generation and merging pipeline for player reports",
-          "Bioimpedance integration with advanced body composition metrics",
-          "Interested-to-athlete CRM pipeline for prospect management",
+          "Automated PDF generation and merging for player reports",
+          "Bioimpedance integration with body-composition metrics",
+          "Prospect-to-athlete CRM pipeline",
           "17k+ lines of production Python",
         ],
         metrics: [
           { value: "6", label: "role levels" },
           { value: "17k+", label: "lines of Python" },
-          { value: "auto", label: "PDF reports" },
         ],
-        role: "Solo Creator & Developer",
+        role: "Solo creator and developer",
       },
       cesh: {
         title: "Cesh",
-        domain: "Education · Social Platform",
+        sector: "Education · Social platform",
         description:
-          "Academic social network for CEFET students. Centralizes institutional data (schedules, grades, directory) into a modern platform with social features and intelligent portal synchronization.",
+          "Academic social network for CEFET students. Pulls institutional data (schedules, grades, directory) into a modern platform with social features and automatic portal sync.",
         highlights: [
-          "Zero-credential portal sync via browser extension and userscript",
-          "GitHub Copilot Chat integration with OAuth Device Flow",
-          "Adaptive CSS/XPath selectors that auto-recalibrate on portal changes",
+          "Zero-credential portal sync through a browser extension and userscript",
+          "GitHub Copilot Chat integration over OAuth Device Flow",
+          "Adaptive CSS/XPath selectors that recalibrate when the portal changes",
           "Privacy-first architecture with granular data revocation",
-          "190+ PHP files with PSR-4 namespace structure",
+          "190+ PHP files in a PSR-4 namespace structure",
         ],
         metrics: [
           { value: "190+", label: "PHP files" },
           { value: "0", label: "credentials stored" },
-          { value: "PSR-4", label: "namespacing" },
         ],
-        role: "Solo Creator & Developer",
+        role: "Solo creator and developer",
       },
       pecci: {
         title: "Pecci Cuidado Integrado",
-        domain: "HealthTech · Clinic Management",
+        sector: "Healthtech · Clinic management",
         description:
-          "Clinical management platform for healthcare professionals. Enables data storage, appointment management and patient evolution tracking for an integrated care clinic.",
+          "Clinical management for an integrated care clinic: appointments, patient records and evolution tracking for the professionals who use it every day.",
         highlights: [
-          "Full appointment and patient evolution management",
-          "Professional-focused data management interface",
+          "Appointment and patient-evolution management",
+          "Interface designed around the clinic's professionals",
           "Deployed and running in production",
         ],
-        metrics: [{ value: "live", label: "in production" }],
-        role: "Freelance Developer",
+        metrics: [],
+        role: "Freelance developer, for a client",
       },
     } satisfies Record<ProjectId, ProjectCopy>,
   },
 
+  record: {
+    title: "Track record",
+    items: {
+      visol: {
+        period: "2025 – now",
+        role: "Full Stack Developer, internship",
+        org: "Visol · solar-energy SaaS and CRM",
+        body: "Designed and shipped Vivi AI, the company's production assistant. Led the OWASP security hardening of the PHP core (SQL injection, IDOR, SSRF, webhook HMAC, OAuth CSRF) and integrated the franchise hub across the Angular CRM and the Ionic app.",
+      },
+      freelance: {
+        period: "2024 – now",
+        role: "Full Stack & SaaS Developer",
+        org: "Freelance and independent products",
+        body: "Solo-built multi-tenant SaaS across healthtech, solar energy, sports and education: architecture, backend, web, mobile, deploy and integrations with Google Ads, Meta Graph API, Firebase, OneSignal and ANVISA. Delivered Pecci Cuidado Integrado to a clinic, in production.",
+      },
+      cefet: {
+        period: "2025 – 2028",
+        role: "B.Sc. Information Systems",
+        org: "CEFET/RJ · Nova Friburgo",
+        body: "In progress: systems architecture, databases, distributed computing and software engineering.",
+      },
+    } satisfies Record<ExperienceId, ExperienceCopy>,
+  },
+
   openSource: {
-    label: "Open Source",
-    title: "Code in the open",
-    subtitle:
-      "Tooling, experiments and reference architectures I keep public on GitHub.",
-    cta: "See all repositories",
+    title: "Open source",
+    lead: "Tooling, experiments and reference architectures I keep in public.",
+    cta: "All repositories on GitHub",
     items: {
       kimiPlugin: {
         description:
@@ -260,134 +281,33 @@ const en = {
           "LLM-driven content generation pipeline with prompt orchestration and reusable presets.",
       },
       encurtaAi: {
-        description:
-          "URL shortener with an AI layer for smart slugs and link intelligence.",
+        description: "URL shortener with an AI layer for smart slugs and link intelligence.",
       },
       nestClean: {
         description:
-          "Reference implementation of Clean Architecture in NestJS — layered, testable, framework-agnostic.",
+          "Reference implementation of Clean Architecture in NestJS: layered, testable, framework-agnostic.",
       },
       erpSystem: {
         description:
           "ERP foundation covering core business entities, inventory and operational flows.",
       },
       zeloDocs: {
-        description:
-          "Public product and API documentation for the Zelo healthtech platform.",
+        description: "Public product and API documentation for the Zelo healthtech platform.",
       },
     } satisfies Record<RepoId, RepoCopy>,
   },
 
-  aiSection: {
-    label: "AI & Automation",
-    title: "AI that ships in production",
-    subtitle:
-      "I integrate AI where it creates real value — not as a buzzword, but as a core system capability.",
-    pipelineLabel: "How it runs",
-    pipeline: {
-      ingest: {
-        title: "Ingest",
-        description:
-          "OCR, third-party APIs and portal scraping normalized into typed domain models.",
-      },
-      reason: {
-        title: "Reason",
-        description:
-          "Multi-provider LLM chain with automatic fallback, token accounting and prompt caching.",
-      },
-      orchestrate: {
-        title: "Orchestrate",
-        description:
-          "Celery workers, schedules and circuit breakers turning model output into business actions.",
-      },
-      ship: {
-        title: "Ship",
-        description:
-          "Streamed responses, push notifications and dashboards — observable and rate-limited.",
-      },
-    } satisfies Record<PipelineId, PipelineCopy>,
-    capabilities: [
-      {
-        title: "Multi-Provider LLM Chains",
-        description:
-          "Production systems with OpenAI, Claude and Gemini featuring automatic fallback, token tracking and prompt caching for reliability and cost control.",
-      },
-      {
-        title: "OCR & Document Intelligence",
-        description:
-          "Computer vision pipelines that extract structured data from medication labels, enriched with ANVISA catalog matching for validation.",
-      },
-      {
-        title: "Conversational Agents",
-        description:
-          "Gemini-powered agents with tool use, stream-based responses and circuit breaker patterns for graceful degradation.",
-      },
-      {
-        title: "Intelligent Automation",
-        description:
-          "Celery workflows: ad metrics sync every 30 minutes, SLA breach detection every 5 minutes, nightly royalty calculations and CRM sync.",
-      },
-      {
-        title: "AI-Assisted Development",
-        description:
-          "GitHub Copilot Chat integration via OAuth with context-aware prompt building, conversation persistence and rate-limited access.",
-      },
-      {
-        title: "Image Generation",
-        description:
-          "fal.ai integration for on-demand image generation inside SaaS platforms, as part of real business workflows.",
-      },
-    ],
-  },
-
-  impact: {
-    label: "Impact",
-    title: "Domains I've built for",
-    items: [
-      {
-        title: "HealthTech",
-        description:
-          "Medication management with AI-powered OCR, clinic management systems and LGPD-compliant patient data architecture.",
-      },
-      {
-        title: "Solar Energy",
-        description:
-          "Multi-tenant franchise management with automated royalty calculations, ad campaign orchestration and financial sync.",
-      },
-      {
-        title: "Sports & Gaming",
-        description:
-          "Fantasy sports SaaS with real-time match integration, and academy management with multi-role athlete tracking.",
-      },
-      {
-        title: "Education",
-        description:
-          "Academic social platform with intelligent portal synchronization, AI chat integration and privacy-first data architecture.",
-      },
-      {
-        title: "Enterprise SaaS",
-        description:
-          "Production multi-tenant platforms with role-based access, real-time communication and automated business workflows.",
-      },
-    ],
-  },
-
   contact: {
-    label: "Contact",
-    title: "Let's build something together",
-    subtitle:
-      "Open to new projects, opportunities and collaborations — whether you need a full product built from scratch or AI integrated into systems you already run.",
-    email: "arturpvguerra@gmail.com",
-    cta: "Send me an email",
-    copy: "Copy address",
-    copied: "Copied",
-    github: "GitHub",
-    linkedin: "LinkedIn",
-    resume: "Download CV",
+    title: "Next on the line: your product.",
+    lead: "Open to new projects, full-time roles and collaborations, whether you need a whole product built from scratch or AI wired into systems you already run.",
+    primary: "Email me",
+    copy: "Copy email address",
+    copied: "Email address copied",
+    cv: "Download CV",
   },
 
   footer: {
-    built: "Built with Next.js, TypeScript, Tailwind & WebGL",
+    built: "Designed and built by Artur Guerra with Next.js and Three.js.",
     rights: "All rights reserved.",
     backToTop: "Back to top",
     company:
@@ -399,28 +319,29 @@ const en = {
 /* Shape helpers                                                       */
 /* ------------------------------------------------------------------ */
 
-interface ExperienceCopy {
-  role: string;
-  org: string;
-  period: string;
-  description: string;
+interface StationCopy {
+  title: string;
+  body: string;
+  proof: { value: string; label: string; source: string };
 }
 
 interface ProjectCopy {
   title: string;
-  domain: string;
+  sector: string;
   description: string;
   highlights: string[];
   metrics: { value: string; label: string }[];
   role: string;
 }
 
-interface RepoCopy {
-  description: string;
+interface ExperienceCopy {
+  period: string;
+  role: string;
+  org: string;
+  body: string;
 }
 
-interface PipelineCopy {
-  title: string;
+interface RepoCopy {
   description: string;
 }
 
@@ -431,139 +352,140 @@ export type Translations = typeof en;
 /* ------------------------------------------------------------------ */
 
 const pt: Translations = {
+  meta: {
+    skip: "Pular para o conteúdo",
+    home: "Artur Guerra, voltar ao topo",
+    openMenu: "Abrir menu",
+    closeMenu: "Fechar menu",
+    language: "Idioma",
+  },
+
   nav: {
-    about: "Sobre",
+    line: "Processo",
     work: "Projetos",
-    ai: "IA",
-    open: "Open Source",
+    record: "Trajetória",
+    open: "Open source",
     contact: "Contato",
-    resume: "Currículo",
+    cv: "CV",
   },
 
   hero: {
-    availability: "Disponível para novos projetos",
-    greeting: "Artur Guerra",
-    roles: [
-      "Desenvolvedor Full Stack",
-      "Product Builder",
-      "Engenheiro de IA Aplicada",
-      "Arquiteto de Sistemas",
-    ],
-    headlineLead: "Eu construo",
-    headlineAccent: "produtos reais",
-    headlineTail: "de ponta a ponta.",
-    subtitle:
-      "Da arquitetura ao deploy — SaaS multi-tenant, healthtech e plataformas de automação com IA integrada em cada camada. Não são demos. É produção.",
-    cta: "Ver os projetos",
-    contact: "Falar comigo",
-    resume: "Baixar CV",
-    scroll: "Rolar",
+    title: "Eu construo produtos reais, de ponta a ponta.",
+    lead: "Desenvolvedor full stack e engenheiro de IA. SaaS multi-tenant, healthtech e sistemas com LLM, do primeiro rascunho de arquitetura ao deploy, com IA integrada em cada camada. Nada de demo. Produção.",
+    primary: "Começar um projeto",
+    secondary: "Baixar CV",
+    status: "Disponível para novos projetos",
+    place: "Nova Friburgo, Brasil · remoto",
+    scroll: "Role para rodar a linha",
   },
 
-  about: {
-    label: "Sobre",
-    title: "Engenharia encontra visão de produto",
-    lead: "Eu não escrevo só código — eu entrego produtos.",
-    p1: "Sou Desenvolvedor Full Stack e estudante de Sistemas de Informação no CEFET/RJ, focado em construir sistemas completos que resolvem problemas reais de negócio. Atualmente sou Estagiário de Desenvolvimento Full Stack na Visol, trabalhando com PHP e Angular, onde integrei o hub de franquias à plataforma principal da empresa.",
-    p2: "Cada projeto que assumo é tratado com mentalidade de produto: entender o domínio, projetar para escala e entregar features que geram impacto real. Já construí plataformas SaaS multi-tenant, sistemas de saúde, ferramentas de gestão esportiva e plataformas de gaming — todas do zero.",
-    p3: "O que me diferencia é a integração prática de IA em sistemas reais: pipelines de OCR, cadeias de LLM multi-provider com fallback, agentes inteligentes e workflows automatizados rodando em produção.",
-    stats: [
-      { value: "6", suffix: "+", label: "Produtos entregues" },
-      { value: "83", suffix: "k+", label: "Linhas em uma plataforma" },
-      { value: "5", suffix: "", label: "Setores atendidos" },
-      { value: "3", suffix: "", label: "Provedores de LLM em prod" },
-    ],
-  },
-
-  experience: {
-    label: "Trajetória",
-    title: "Onde venho construindo",
-    items: {
-      visol: {
-        role: "Estagiário de Desenvolvimento Full Stack",
-        org: "Visol",
-        period: "Atual",
-        description:
-          "Desenvolvimento com PHP e Angular na plataforma principal da empresa, onde integrei o hub de franquias ao sistema central.",
+  line: {
+    title: "Como um produto é construído aqui",
+    lead: "Todo produto desce pela mesma linha: sete estações, um construtor, nada terceirizado. Continue rolando e veja um ganhar forma.",
+    station: "Estação",
+    of: "de",
+    tools: "Ferramentas nesta estação",
+    position: "Posição na linha",
+    stations: {
+      architecture: {
+        title: "Arquitetura",
+        body: "Toda construção começa pelo domínio, não pelo framework. Eu mapeio o negócio em módulos, tenants e permissões e defino os limites que mantêm um código alterável além de 80.000 linhas.",
+        proof: {
+          value: "34",
+          label: "módulos em uma única plataforma multi-tenant",
+          source: "EvoSolar Franquias · 83k+ linhas",
+        },
       },
-      founder: {
-        role: "Criador & Desenvolvedor Solo",
-        org: "EvoSolar Franquias · Zelo App · Fantasy Picks",
-        period: "Em andamento",
-        description:
-          "Concepção, construção e operação de produtos SaaS completos — arquitetura, backend, mobile, integração de IA e infraestrutura.",
+      data: {
+        title: "Dados",
+        body: "PostgreSQL como fonte da verdade, Redis onde a velocidade importa e regras de acesso desenhadas no modelo desde a primeira migration, para que permissão nunca vire improviso.",
+        proof: {
+          value: "6",
+          label: "níveis de acesso, de admin a médico e técnico",
+          source: "BR1 Sports Academy",
+        },
       },
-      cefet: {
-        role: "Bacharelado em Sistemas de Informação",
-        org: "CEFET/RJ",
-        period: "Em curso",
-        description:
-          "Arquitetura de sistemas, bancos de dados, computação distribuída e fundamentos de engenharia de software.",
+      api: {
+        title: "API e workers",
+        body: "Serviços FastAPI assíncronos e workers em background que continuam rodando quando ninguém está olhando: agendamentos, retries, webhooks e chat em tempo real.",
+        proof: {
+          value: "38",
+          label: "endpoints de API em 15 domínios de serviço",
+          source: "Zelo App",
+        },
       },
-      freelance: {
-        role: "Desenvolvedor Freelancer",
-        org: "Pecci Cuidado Integrado",
-        period: "Entregue",
-        description:
-          "Plataforma de gestão clínica para uma clínica de cuidado integrado — implantada e rodando em produção.",
+      intelligence: {
+        title: "Inteligência",
+        body: "IA integrada como componente do sistema, não como demo colada por cima: cadeias de LLM multi-provider com fallback automático, pipelines de OCR e agentes que chamam ferramentas reais.",
+        proof: {
+          value: "3",
+          label: "provedores de LLM em produção, com fallback automático",
+          source: "Vivi AI · Zelo App",
+        },
+      },
+      interface: {
+        title: "Interface",
+        body: "Front ends web e mobile que as pessoas usam todo dia: React e Next.js na web, React Native e Expo no celular, Angular e Ionic onde a plataforma já vive.",
+        proof: {
+          value: "2",
+          label: "apps cliente atendidos por um único backend de IA",
+          source: "Vivi AI · web em Angular e mobile em Ionic",
+        },
+      },
+      quality: {
+        title: "Portão de qualidade",
+        body: "Nada sai sem passar pelo portão: suítes de testes automatizados, CI a cada push, retries com backoff e revisões de segurança contra o OWASP.",
+        proof: {
+          value: "1.900+",
+          label: "testes automatizados, 99,9% passando",
+          source: "Vivi AI",
+        },
+      },
+      ship: {
+        title: "Entrega",
+        body: "Containerizado com Docker e publicado via CI na nuvem. Depois, o próximo produto entra na linha.",
+        proof: {
+          value: "7",
+          label: "produtos construídos e entregues de ponta a ponta",
+          source: "Listados abaixo",
+        },
       },
     },
   },
 
-  specialties: {
-    label: "Competências",
-    title: "O que eu construo",
-    subtitle:
-      "Seis disciplinas que se somam em produtos completos e prontos para produção.",
-    items: [
-      {
-        title: "Engenharia Full Stack",
-        description:
-          "Desenvolvimento ponta a ponta com Python, FastAPI, Flask, React, Next.js e TypeScript. Do design do banco até interfaces responsivas.",
-      },
-      {
-        title: "Arquitetura de Sistemas",
-        description:
-          "SaaS multi-tenant, Clean Architecture, backends async-first, controle de acesso por roles e infraestrutura de produção com Docker.",
-      },
-      {
-        title: "IA Aplicada",
-        description:
-          "Integração de LLMs multi-provider (OpenAI, Claude, Gemini) com cadeias de fallback, pipelines de OCR e extração de dados em produção.",
-      },
-      {
-        title: "Agentes & Automação",
-        description:
-          "Jobs em background com Celery, tarefas agendadas, pipelines de sincronização em tempo real, push notifications e orquestração de workflows.",
-      },
-      {
-        title: "APIs & Integrações",
-        description:
-          "Google Ads, Meta Graph API, Firebase, OneSignal, football-data.org, SharePoint, ANVISA — experiência profunda em integrações.",
-      },
-      {
-        title: "SaaS & Produto",
-        description:
-          "Do MVP à produção: arquiteturas multi-tenant, fluxos de pagamento, dashboards de analytics, onboarding e mecânicas de retenção.",
-      },
-    ],
-  },
-
-  projects: {
-    label: "Projetos selecionados",
-    title: "Produtos que eu entreguei",
-    subtitle:
-      "Sistemas reais rodando em produção — construídos sozinho, da primeira migration ao último deploy.",
-    stackLabel: "Stack",
-    highlightsLabel: "Destaques",
-    roleLabel: "Papel",
-    viewCode: "Ver código",
-    viewLive: "Ver site",
-    privateRepo: "Repositório privado",
+  shipped: {
+    title: "Saiu da linha",
+    lead: "Sete sistemas projetados, construídos e entregues, a maioria sozinho, da primeira migration ao último deploy.",
+    role: "Papel",
+    stack: "Stack",
+    manifest: "Manifesto completo",
+    production: "Rodando em produção",
+    live: "Abrir o produto no ar",
+    docs: "Ler a documentação pública",
+    privateCode: "Código privado",
     items: {
+      vivi: {
+        title: "Vivi AI",
+        sector: "Assistente de IA · SaaS de energia solar",
+        description:
+          "Assistente conversacional em produção da Visol. Um microsserviço Python/FastAPI que orquestra OpenAI, Claude e Gemini com fallback automático, roda um agente de tratamento de intents com tool use e conduz o onboarding por uma máquina de estados, atendendo o app web em Angular e o app mobile em Ionic da empresa.",
+        highlights: [
+          "Orquestração de LLMs multi-provider com fallback automático",
+          "Agente de tratamento de intents com tool use e memória multi-turno",
+          "Onboarding guiado por máquina de estados",
+          "Retry e backoff com Tenacity, mais uma camada de permissões sobre o modelo de licenciamento da Visol",
+          "CI/CD no GitHub Actions",
+        ],
+        metrics: [
+          { value: "1.900+", label: "testes automatizados" },
+          { value: "99,9%", label: "taxa de aprovação" },
+          { value: "3", label: "provedores de LLM" },
+        ],
+        role: "Projetei e construí na Visol",
+      },
       evosolar: {
         title: "EvoSolar Franquias",
-        domain: "Energia Solar · SaaS",
+        sector: "Energia solar · SaaS",
         description:
           "Plataforma multi-tenant de gestão de franquias para empresas de energia solar. Cuida de onboarding, KPIs, cálculo de royalties, campanhas de ads e comunicação interna entre as unidades.",
         highlights: [
@@ -578,13 +500,13 @@ const pt: Translations = {
           { value: "83k+", label: "linhas de código" },
           { value: "2", label: "plataformas de ads" },
         ],
-        role: "Criador & Desenvolvedor Solo",
+        role: "Criador e desenvolvedor solo",
       },
       zelo: {
         title: "Zelo App",
-        domain: "HealthTech · SaaS",
+        sector: "Healthtech · SaaS",
         description:
-          "Plataforma de gestão de medicamentos para famílias com idosos e pacientes crônicos. Centraliza agendamento de doses, coordenação de cuidadores, estoque e analytics de adesão.",
+          "Gestão de medicamentos para famílias com idosos e pacientes crônicos. Centraliza agendamento de doses, coordenação de cuidadores, estoque e analytics de adesão.",
         highlights: [
           "Cadeia de IA multi-provider (OpenAI, Claude, Gemini) com fallback automático",
           "Extração de medicamentos por OCR enriquecida com o catálogo da ANVISA",
@@ -597,18 +519,18 @@ const pt: Translations = {
           { value: "15", label: "domínios de serviço" },
           { value: "3", label: "provedores de LLM" },
         ],
-        role: "Criador & Desenvolvedor Solo",
+        role: "Criador e desenvolvedor solo",
       },
       fantasy: {
         title: "Fantasy Picks",
-        domain: "Esportes & Gaming · SaaS",
+        sector: "Esportes e gaming · SaaS",
         description:
-          "Plataforma de fantasy sports com mecânica survivor de picks. Usuários compram picks para entrar em campeonatos reais de futebol, escolhem times toda semana e competem por prêmios.",
+          "Fantasy sports com mecânica survivor de picks. Usuários compram picks para entrar em campeonatos reais de futebol, escolhem times a cada rodada e competem por prêmios com base em resultados reais.",
         highlights: [
           "Arquitetura async-first com asyncpg para alta concorrência",
           "Rastreamento de linhagem de picks com validação de regras de negócio complexas",
           "Integração football-data.org cobrindo mais de 12 ligas",
-          "Sistema de carteira com saldo duplo (picks + prêmios em BRL)",
+          "Carteira com saldo duplo (picks e prêmios em BRL)",
           "Clean Architecture com repository pattern e camadas de serviço",
         ],
         metrics: [
@@ -616,34 +538,33 @@ const pt: Translations = {
           { value: "2", label: "saldos na carteira" },
           { value: "100%", label: "I/O assíncrono" },
         ],
-        role: "Criador & Desenvolvedor Solo",
+        role: "Criador e desenvolvedor solo",
       },
       br1: {
         title: "BR1 Sports Academy",
-        domain: "Gestão Esportiva",
+        sector: "Gestão esportiva",
         description:
-          "Sistema de gestão de academia esportiva que cobre todo o ciclo de vida de jovens atletas — do interesse inicial ao treino avançado, com coordenação de equipe multidisciplinar.",
+          "Gestão de academia esportiva para jovens atletas, cobrindo todo o ciclo de vida, do interesse inicial ao treino avançado, com técnicos, médicos e psicólogos trabalhando em um só sistema.",
         highlights: [
           "Acesso baseado em seis níveis de papel (admin, técnico, médico, psicólogo, preparador)",
-          "Pipeline automatizado de geração e mesclagem de PDFs para relatórios de atletas",
-          "Integração de bioimpedância com métricas avançadas de composição corporal",
-          "Pipeline de CRM de interessado a atleta para gestão de prospects",
+          "Geração e mesclagem automatizada de PDFs para relatórios de atletas",
+          "Integração de bioimpedância com métricas de composição corporal",
+          "Pipeline de CRM de interessado a atleta",
           "Mais de 17 mil linhas de Python em produção",
         ],
         metrics: [
           { value: "6", label: "níveis de acesso" },
           { value: "17k+", label: "linhas de Python" },
-          { value: "auto", label: "relatórios em PDF" },
         ],
-        role: "Criador & Desenvolvedor Solo",
+        role: "Criador e desenvolvedor solo",
       },
       cesh: {
         title: "Cesh",
-        domain: "Educação · Plataforma Social",
+        sector: "Educação · Plataforma social",
         description:
-          "Rede social acadêmica para estudantes do CEFET. Centraliza dados institucionais (horários, notas, diretório) em uma plataforma moderna com recursos sociais e sincronização inteligente do portal.",
+          "Rede social acadêmica para estudantes do CEFET. Traz dados institucionais (horários, notas, diretório) para uma plataforma moderna, com recursos sociais e sincronização automática do portal.",
         highlights: [
-          "Sincronização do portal sem armazenar credenciais, via extensão e userscript",
+          "Sincronização do portal sem armazenar credenciais, via extensão de navegador e userscript",
           "Integração GitHub Copilot Chat com OAuth Device Flow",
           "Seletores CSS/XPath adaptativos que se recalibram quando o portal muda",
           "Arquitetura privacy-first com revogação granular de dados",
@@ -652,32 +573,53 @@ const pt: Translations = {
         metrics: [
           { value: "190+", label: "arquivos PHP" },
           { value: "0", label: "credenciais armazenadas" },
-          { value: "PSR-4", label: "namespaces" },
         ],
-        role: "Criador & Desenvolvedor Solo",
+        role: "Criador e desenvolvedor solo",
       },
       pecci: {
         title: "Pecci Cuidado Integrado",
-        domain: "HealthTech · Gestão Clínica",
+        sector: "Healthtech · Gestão clínica",
         description:
-          "Plataforma de gestão clínica para profissionais de saúde. Permite armazenamento de dados, gestão de consultas e acompanhamento da evolução dos pacientes.",
+          "Gestão clínica para uma clínica de cuidado integrado: consultas, prontuários e acompanhamento da evolução dos pacientes para os profissionais que a usam todos os dias.",
         highlights: [
-          "Gestão completa de consultas e evolução de pacientes",
-          "Interface de gestão de dados voltada ao profissional",
+          "Gestão de consultas e evolução de pacientes",
+          "Interface desenhada em torno dos profissionais da clínica",
           "Implantado e rodando em produção",
         ],
-        metrics: [{ value: "live", label: "em produção" }],
-        role: "Desenvolvedor Freelancer",
+        metrics: [],
+        role: "Desenvolvedor freelancer, para um cliente",
+      },
+    },
+  },
+
+  record: {
+    title: "Trajetória",
+    items: {
+      visol: {
+        period: "2025 – atual",
+        role: "Desenvolvedor Full Stack, estágio",
+        org: "Visol · SaaS e CRM de energia solar",
+        body: "Projetei e entreguei a Vivi AI, o assistente em produção da empresa. Liderei o hardening de segurança OWASP do core PHP (SQL injection, IDOR, SSRF, HMAC de webhook, CSRF em OAuth) e integrei o hub de franquias ao CRM Angular e ao app Ionic.",
+      },
+      freelance: {
+        period: "2024 – atual",
+        role: "Desenvolvedor Full Stack e SaaS",
+        org: "Freelance e produtos independentes",
+        body: "Construí sozinho SaaS multi-tenant em healthtech, energia solar, esportes e educação: arquitetura, backend, web, mobile, deploy e integrações com Google Ads, Meta Graph API, Firebase, OneSignal e ANVISA. Entreguei a Pecci Cuidado Integrado a uma clínica, em produção.",
+      },
+      cefet: {
+        period: "2025 – 2028",
+        role: "Bacharelado em Sistemas de Informação",
+        org: "CEFET/RJ · Nova Friburgo",
+        body: "Em curso: arquitetura de sistemas, bancos de dados, computação distribuída e engenharia de software.",
       },
     },
   },
 
   openSource: {
-    label: "Open Source",
-    title: "Código aberto",
-    subtitle:
-      "Ferramentas, experimentos e arquiteturas de referência que mantenho públicos no GitHub.",
-    cta: "Ver todos os repositórios",
+    title: "Open source",
+    lead: "Ferramentas, experimentos e arquiteturas de referência que mantenho públicos.",
+    cta: "Todos os repositórios no GitHub",
     items: {
       kimiPlugin: {
         description:
@@ -693,7 +635,7 @@ const pt: Translations = {
       },
       nestClean: {
         description:
-          "Implementação de referência de Clean Architecture em NestJS — em camadas, testável e agnóstica de framework.",
+          "Implementação de referência de Clean Architecture em NestJS: em camadas, testável e agnóstica de framework.",
       },
       erpSystem: {
         description:
@@ -706,116 +648,17 @@ const pt: Translations = {
     },
   },
 
-  aiSection: {
-    label: "IA & Automação",
-    title: "IA que chega à produção",
-    subtitle:
-      "Integro IA onde ela gera valor real — não como buzzword, mas como capacidade central do sistema.",
-    pipelineLabel: "Como funciona",
-    pipeline: {
-      ingest: {
-        title: "Ingestão",
-        description:
-          "OCR, APIs de terceiros e sincronização de portais normalizados em modelos de domínio tipados.",
-      },
-      reason: {
-        title: "Raciocínio",
-        description:
-          "Cadeia de LLMs multi-provider com fallback automático, contagem de tokens e cache de prompts.",
-      },
-      orchestrate: {
-        title: "Orquestração",
-        description:
-          "Workers Celery, agendamentos e circuit breakers transformando a saída do modelo em ações de negócio.",
-      },
-      ship: {
-        title: "Entrega",
-        description:
-          "Respostas em streaming, push notifications e dashboards — observáveis e com rate limiting.",
-      },
-    },
-    capabilities: [
-      {
-        title: "Cadeias de LLM Multi-Provider",
-        description:
-          "Sistemas em produção com OpenAI, Claude e Gemini, com fallback automático, rastreio de tokens e cache de prompts para confiabilidade e custo.",
-      },
-      {
-        title: "OCR & Inteligência Documental",
-        description:
-          "Pipelines de visão computacional que extraem dados estruturados de rótulos de medicamentos, validados contra o catálogo da ANVISA.",
-      },
-      {
-        title: "Agentes Conversacionais",
-        description:
-          "Agentes com Gemini usando ferramentas, respostas em stream e circuit breakers para degradação controlada.",
-      },
-      {
-        title: "Automação Inteligente",
-        description:
-          "Workflows Celery: sync de métricas de ads a cada 30 minutos, detecção de quebra de SLA a cada 5 minutos, royalties noturnos e sync de CRM.",
-      },
-      {
-        title: "Desenvolvimento Assistido por IA",
-        description:
-          "Integração GitHub Copilot Chat via OAuth com prompts context-aware, persistência de conversas e controle de acesso com rate limiting.",
-      },
-      {
-        title: "Geração de Imagens",
-        description:
-          "Integração fal.ai para geração de imagens sob demanda dentro de plataformas SaaS, como parte de workflows de negócio.",
-      },
-    ],
-  },
-
-  impact: {
-    label: "Impacto",
-    title: "Domínios onde construí",
-    items: [
-      {
-        title: "HealthTech",
-        description:
-          "Gestão de medicamentos com OCR e IA, sistemas de gestão clínica e arquitetura de dados de pacientes em conformidade com a LGPD.",
-      },
-      {
-        title: "Energia Solar",
-        description:
-          "Gestão multi-tenant de franquias com cálculo automatizado de royalties, orquestração de campanhas e sincronização financeira.",
-      },
-      {
-        title: "Esportes & Gaming",
-        description:
-          "SaaS de fantasy sports com integração de partidas em tempo real e gestão de academia com acompanhamento multi-papel de atletas.",
-      },
-      {
-        title: "Educação",
-        description:
-          "Plataforma social acadêmica com sincronização inteligente de portal, chat com IA e arquitetura privacy-first.",
-      },
-      {
-        title: "SaaS Empresarial",
-        description:
-          "Plataformas multi-tenant em produção com controle de acesso por papéis, comunicação em tempo real e workflows automatizados.",
-      },
-    ],
-  },
-
   contact: {
-    label: "Contato",
-    title: "Vamos construir algo juntos",
-    subtitle:
-      "Aberto a novos projetos, oportunidades e colaborações — seja para construir um produto completo do zero ou integrar IA aos sistemas que você já opera.",
-    email: "arturpvguerra@gmail.com",
-    cta: "Me envie um email",
-    copy: "Copiar endereço",
-    copied: "Copiado",
-    github: "GitHub",
-    linkedin: "LinkedIn",
-    resume: "Baixar CV",
+    title: "Próximo na linha: o seu produto.",
+    lead: "Aberto a novos projetos, vagas full-time e colaborações, seja para construir um produto completo do zero ou integrar IA aos sistemas que você já opera.",
+    primary: "Me envie um email",
+    copy: "Copiar endereço de email",
+    copied: "Endereço de email copiado",
+    cv: "Baixar CV",
   },
 
   footer: {
-    built: "Construído com Next.js, TypeScript, Tailwind & WebGL",
+    built: "Projetado e construído por Artur Guerra com Next.js e Three.js.",
     rights: "Todos os direitos reservados.",
     backToTop: "Voltar ao topo",
     company:

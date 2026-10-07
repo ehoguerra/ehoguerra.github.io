@@ -1,5 +1,5 @@
 /**
- * Locale-independent site data: links, project metadata, tech stack.
+ * Locale-independent site data: links, stations, products, stacks.
  * All translatable copy lives in `i18n.ts`, keyed by the ids declared here.
  */
 
@@ -15,10 +15,48 @@ export const CV = {
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* Projects                                                            */
+/* The line: build stations, in order                                  */
+/* ------------------------------------------------------------------ */
+
+export type StationId =
+  | "architecture"
+  | "data"
+  | "api"
+  | "intelligence"
+  | "interface"
+  | "quality"
+  | "ship";
+
+export interface StationMeta {
+  readonly id: StationId;
+  readonly tools: readonly string[];
+}
+
+export const STATIONS: readonly StationMeta[] = [
+  {
+    id: "architecture",
+    tools: ["Clean Architecture", "Multi-tenant SaaS", "RBAC", "Domain modelling"],
+  },
+  { id: "data", tools: ["PostgreSQL", "Redis", "MySQL", "SQLAlchemy", "asyncpg"] },
+  { id: "api", tools: ["FastAPI", "Celery", "WebSockets", "Flask", "PHP 8.3 · Slim"] },
+  {
+    id: "intelligence",
+    tools: ["OpenAI", "Claude", "Gemini", "Tool-use agents", "OCR", "Prompt caching"],
+  },
+  {
+    id: "interface",
+    tools: ["React", "Next.js", "TypeScript", "React Native", "Expo", "Angular", "Ionic"],
+  },
+  { id: "quality", tools: ["Test suites", "GitHub Actions", "OWASP", "HMAC", "Tenacity"] },
+  { id: "ship", tools: ["Docker", "GitHub Actions", "AWS", "Oracle Cloud", "Cloudflare"] },
+] as const;
+
+/* ------------------------------------------------------------------ */
+/* Shipped products                                                    */
 /* ------------------------------------------------------------------ */
 
 export type ProjectId =
+  | "vivi"
   | "evosolar"
   | "zelo"
   | "fantasy"
@@ -28,107 +66,85 @@ export type ProjectId =
 
 export interface ProjectMeta {
   readonly id: ProjectId;
-  readonly index: string;
-  /** Repo URL when the source is public, otherwise null. */
-  readonly repo: string | null;
+  /** Only set when a source says it runs in production. */
+  readonly production: boolean;
   readonly live: string | null;
-  readonly source: "public" | "private";
-  readonly ai: boolean;
-  readonly featured: boolean;
-  /** Two hues used for the card's gradient signature. */
-  readonly hues: readonly [string, string];
+  /** Public repository or docs, when one exists. */
+  readonly repo: string | null;
   readonly stack: readonly string[];
 }
 
+/** Order matches the pallet in the 3D scene: index 0 is the case on top. */
 export const PROJECTS: readonly ProjectMeta[] = [
   {
-    id: "evosolar",
-    index: "01",
+    id: "vivi",
+    production: true,
+    live: "https://vivi.visol.app",
     repo: null,
+    stack: ["Python", "FastAPI", "OpenAI", "Claude", "Gemini", "Tenacity", "GitHub Actions"],
+  },
+  {
+    id: "evosolar",
+    production: false,
     live: null,
-    source: "private",
-    ai: true,
-    featured: true,
-    hues: ["#f59e6b", "#b45cf5"],
-    stack: [
-      "FastAPI",
-      "React",
-      "React Native",
-      "PostgreSQL",
-      "Redis",
-      "Celery",
-      "Docker",
-    ],
+    repo: null,
+    stack: ["FastAPI", "React", "React Native", "PostgreSQL", "Redis", "Celery", "Docker"],
   },
   {
     id: "zelo",
-    index: "02",
-    repo: "https://github.com/ehoguerra/zelo_docs",
+    production: false,
     live: null,
-    source: "private",
-    ai: true,
-    featured: true,
-    hues: ["#2dd4d4", "#6d5ef8"],
-    stack: [
-      "FastAPI",
-      "React Native",
-      "Expo",
-      "PostgreSQL",
-      "Redis",
-      "Celery",
-    ],
+    repo: "https://github.com/ehoguerra/zelo_docs",
+    stack: ["FastAPI", "React Native", "Expo", "PostgreSQL", "Redis", "Celery"],
   },
   {
     id: "fantasy",
-    index: "03",
-    repo: null,
+    production: false,
     live: null,
-    source: "private",
-    ai: false,
-    featured: false,
-    hues: ["#4ade80", "#2dd4d4"],
-    stack: [
-      "FastAPI",
-      "Next.js",
-      "TypeScript",
-      "Tailwind",
-      "PostgreSQL",
-      "Redis",
-    ],
+    repo: null,
+    stack: ["FastAPI", "Next.js", "TypeScript", "Tailwind", "PostgreSQL", "Redis"],
   },
   {
     id: "br1",
-    index: "04",
-    repo: null,
+    production: false,
     live: null,
-    source: "private",
-    ai: false,
-    featured: false,
-    hues: ["#f472b6", "#b45cf5"],
+    repo: null,
     stack: ["Flask", "PostgreSQL", "Bootstrap", "Chart.js", "ReportLab"],
   },
   {
     id: "cesh",
-    index: "05",
-    repo: null,
+    production: false,
     live: null,
-    source: "private",
-    ai: true,
-    featured: false,
-    hues: ["#6d5ef8", "#2dd4d4"],
-    stack: ["PHP 8.3", "Slim 4", "MySQL", "Docker", "Flask", "AWS S3"],
+    repo: null,
+    stack: ["PHP 8.3", "Slim 4", "MySQL", "Docker", "AWS S3"],
   },
   {
     id: "pecci",
-    index: "06",
-    repo: null,
+    production: true,
     live: null,
-    source: "private",
-    ai: false,
-    featured: false,
-    hues: ["#38bdf8", "#6d5ef8"],
-    stack: ["Flask", "PostgreSQL", "Bootstrap", "JavaScript ES6+"],
+    repo: null,
+    stack: ["Flask", "PostgreSQL", "Bootstrap", "JavaScript"],
   },
+] as const;
+
+/* ------------------------------------------------------------------ */
+/* Track record                                                        */
+/* ------------------------------------------------------------------ */
+
+export type ExperienceId = "visol" | "freelance" | "cefet";
+
+export interface ExperienceMeta {
+  readonly id: ExperienceId;
+  readonly tags: readonly string[];
+}
+
+export const EXPERIENCE: readonly ExperienceMeta[] = [
+  { id: "visol", tags: ["Python", "FastAPI", "LLMs", "PHP", "Angular", "Ionic"] },
+  {
+    id: "freelance",
+    tags: ["FastAPI", "React", "React Native", "PostgreSQL", "Multi-tenant"],
+  },
+  { id: "cefet", tags: ["Information Systems"] },
 ] as const;
 
 /* ------------------------------------------------------------------ */
@@ -187,66 +203,4 @@ export const OPEN_SOURCE: readonly RepoMeta[] = [
     url: "https://github.com/ehoguerra/zelo_docs",
     tags: ["Docs", "Product", "HealthTech"],
   },
-] as const;
-
-/* ------------------------------------------------------------------ */
-/* Misc                                                                */
-/* ------------------------------------------------------------------ */
-
-export const TECH_MARQUEE = [
-  "Python",
-  "FastAPI",
-  "TypeScript",
-  "Next.js",
-  "React",
-  "React Native",
-  "PostgreSQL",
-  "Redis",
-  "Celery",
-  "Docker",
-  "Flask",
-  "PHP",
-  "Angular",
-  "Tailwind",
-  "OpenAI",
-  "Claude",
-  "Gemini",
-  "WebSockets",
-  "AWS S3",
-  "Expo",
-  "Clean Architecture",
-  "OAuth 2.0",
-] as const;
-
-export type ExperienceId = "visol" | "founder" | "cefet" | "freelance";
-
-export interface ExperienceMeta {
-  readonly id: ExperienceId;
-  readonly tags: readonly string[];
-  readonly current: boolean;
-}
-
-export const EXPERIENCE: readonly ExperienceMeta[] = [
-  { id: "visol", tags: ["PHP", "Angular", "Integrations"], current: true },
-  {
-    id: "founder",
-    tags: ["FastAPI", "React Native", "LLM", "Multi-tenant"],
-    current: true,
-  },
-  { id: "cefet", tags: ["Information Systems"], current: true },
-  {
-    id: "freelance",
-    tags: ["Flask", "PostgreSQL", "HealthTech"],
-    current: false,
-  },
-] as const;
-
-/* AI pipeline stages rendered as an animated diagram. */
-export type PipelineId = "ingest" | "reason" | "orchestrate" | "ship";
-
-export const PIPELINE: readonly PipelineId[] = [
-  "ingest",
-  "reason",
-  "orchestrate",
-  "ship",
 ] as const;

@@ -1,54 +1,55 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+// One family, three voices: the width axis gives expanded nameplates,
+// normal reading text and condensed data from the same face.
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument",
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+  axes: ["wdth"],
   display: "swap",
 });
 
 const SITE_URL = "https://arturguerra.com";
-const TITLE = "Artur Guerra — Full Stack Developer & Product Builder";
+const TITLE = "Artur Guerra — Full Stack Developer & AI Engineer";
 const DESCRIPTION =
-  "Full Stack Developer building real products end to end — multi-tenant SaaS, healthtech and automation platforms with AI integrated into every layer.";
+  "I build real products end to end: multi-tenant SaaS, healthtech and LLM systems running in production, from architecture to deploy.";
+
+/* Impeccable direction contract. Kept as an HTML comment in the built
+   markup so the finish review can audit the render against it.
+   Static, author-written string: no user input reaches it. */
+const CONTRACT = `<!--
+THESIS: The site is Artur's production line. Scrolling runs his build process station by station until real products ship. It refuses the dark glowing-blob developer hero and the card-grid resume.
+OWN-WORLD: Daylight assembly hall: concrete-grey floor, graphite ink, safety-yellow line and fields; machined alloy plates with screws, black belt rubber, status lamps; Archivo expanded for nameplates, normal for reading.
+STORY: A founder or recruiter watches a product get built (architecture, data, API, AI, interface, tests, ship), sees the systems that left the line with real numbers, then emails Artur or takes the CV.
+FIRST VIEWPORT: Left: the claim "I build real products end to end." with email and CV actions; right: the 3D line receding diagonally with the finished product at its end; yellow floor line running out of frame.
+FORM: Production line, candidate 3 of 7, seed d74f41d2.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->`;
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#05060a",
-  colorScheme: "dark",
+  themeColor: "#e2e3de",
+  colorScheme: "light",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: TITLE,
   description: DESCRIPTION,
-  applicationName: "Artur Guerra — Portfolio",
+  applicationName: "Artur Guerra",
   keywords: [
     "Full Stack Developer",
-    "Product Builder",
     "AI Engineer",
+    "LLM",
     "SaaS",
     "Python",
     "FastAPI",
     "React",
     "Next.js",
-    "TypeScript",
+    "React Native",
     "Artur Guerra",
   ],
   authors: [{ name: "Artur Guerra", url: SITE_URL }],
@@ -79,7 +80,7 @@ const JSON_LD = {
       "@id": `${SITE_URL}/#person`,
       name: "Artur Guerra",
       url: SITE_URL,
-      jobTitle: "Full Stack Developer & Product Builder",
+      jobTitle: "Full Stack Developer & AI Engineer",
       email: "mailto:arturpvguerra@gmail.com",
       sameAs: [
         "https://github.com/ehoguerra",
@@ -88,7 +89,7 @@ const JSON_LD = {
       knowsAbout: [
         "Full Stack Development",
         "Systems Architecture",
-        "Applied AI",
+        "LLM Orchestration",
         "Multi-tenant SaaS",
       ],
     },
@@ -116,11 +117,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} h-full antialiased`}
-    >
-      <body className="flex min-h-full w-full flex-col overflow-x-hidden bg-background text-foreground">
+    <html lang="en" className={`${archivo.variable} antialiased`}>
+      <body className="min-h-dvh overflow-x-clip bg-floor text-ink">
+        <div hidden dangerouslySetInnerHTML={{ __html: CONTRACT }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

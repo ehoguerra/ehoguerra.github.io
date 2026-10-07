@@ -2,20 +2,17 @@
 
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { translations, type Locale } from "@/lib/i18n";
+import { useReducedMotion } from "@/lib/hooks";
+import { useSmoothScroll } from "@/lib/scroll";
+import { LineStage } from "./three/LineStage";
 import { Navbar } from "./Navbar";
 import { Hero } from "./Hero";
-import { About } from "./About";
-import { Experience } from "./Experience";
-import { Specialties } from "./Specialties";
-import { Projects } from "./Projects";
+import { Line } from "./Line";
+import { Shipped } from "./Shipped";
+import { TrackRecord } from "./TrackRecord";
 import { OpenSource } from "./OpenSource";
-import { AISection } from "./AISection";
-import { Impact } from "./Impact";
 import { Contact } from "./Contact";
 import { Footer } from "./Footer";
-import { Cursor } from "./ui/Cursor";
-import { ScrollProgress } from "./ui/ScrollProgress";
-import { Preloader } from "./ui/Preloader";
 
 const STORAGE_KEY = "ag-locale";
 
@@ -43,19 +40,25 @@ export function Portfolio() {
   );
   const [chosen, setChosen] = useState<Locale | null>(null);
   const locale = chosen ?? preferred;
-  const setLocale = setChosen;
   const t = translations[locale];
+  const reduced = useReducedMotion();
+
+  useSmoothScroll(!reduced);
 
   useEffect(() => {
     document.documentElement.lang = locale === "pt" ? "pt-BR" : "en";
-    window.localStorage.setItem(STORAGE_KEY, locale);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, locale);
+    } catch {
+      // Storage blocked: the choice simply won't persist.
+    }
   }, [locale]);
 
   const navItems = useMemo(
     () => [
-      { id: "about", label: t.nav.about },
+      { id: "process", label: t.nav.line },
       { id: "work", label: t.nav.work },
-      { id: "ai", label: t.nav.ai },
+      { id: "experience", label: t.nav.record },
       { id: "open-source", label: t.nav.open },
       { id: "contact", label: t.nav.contact },
     ],
@@ -63,31 +66,21 @@ export function Portfolio() {
   );
 
   return (
-    <div className="grain">
-      <Preloader />
-      <ScrollProgress />
-      <Cursor />
-
-      <Navbar
-        items={navItems}
-        locale={locale}
-        onLocaleChange={setLocale}
-        t={t.nav}
-      />
-
-      <main>
+    <>
+      <a href="#main" className="skip-link btn btn-signal">
+        {t.meta.skip}
+      </a>
+      <LineStage />
+      <Navbar items={navItems} locale={locale} onLocaleChange={setChosen} t={t.nav} meta={t.meta} />
+      <main id="main" className="relative z-10">
         <Hero t={t.hero} locale={locale} />
-        <About t={t.about} />
-        <Experience t={t.experience} />
-        <Specialties t={t.specialties} workLabel={t.nav.work} />
-        <Projects t={t.projects} />
-        <AISection t={t.aiSection} />
+        <Line t={t.line} />
+        <Shipped t={t.shipped} />
+        <TrackRecord t={t.record} />
         <OpenSource t={t.openSource} />
-        <Impact t={t.impact} />
         <Contact t={t.contact} locale={locale} />
       </main>
-
       <Footer t={t.footer} />
-    </div>
+    </>
   );
 }
