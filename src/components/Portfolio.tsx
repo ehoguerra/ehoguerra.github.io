@@ -47,12 +47,19 @@ export function Portfolio() {
 
   useEffect(() => {
     document.documentElement.lang = locale === "pt" ? "pt-BR" : "en";
+  }, [locale]);
+
+  // Persist only an explicit choice. Persisting `locale` from an effect would
+  // write the hydration pass's "en" over the saved preference before
+  // useSyncExternalStore re-reads it.
+  const choose = (next: Locale) => {
+    setChosen(next);
     try {
-      window.localStorage.setItem(STORAGE_KEY, locale);
+      window.localStorage.setItem(STORAGE_KEY, next);
     } catch {
       // Storage blocked: the choice simply won't persist.
     }
-  }, [locale]);
+  };
 
   const navItems = useMemo(
     () => [
@@ -71,7 +78,7 @@ export function Portfolio() {
         {t.meta.skip}
       </a>
       <LineStage />
-      <Navbar items={navItems} locale={locale} onLocaleChange={setChosen} t={t.nav} meta={t.meta} />
+      <Navbar items={navItems} locale={locale} onLocaleChange={choose} t={t.nav} meta={t.meta} />
       <main id="main" className="relative z-10">
         <Hero t={t.hero} locale={locale} />
         <Line t={t.line} />
