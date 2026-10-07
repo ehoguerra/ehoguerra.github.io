@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T00:00:00Z",
+  "title": "Design System: Artur Guerra — The Line",
+  "extensions": {
+    "colorMeta": {
+      "signal": { "role": "primary", "displayName": "Safety Signal Yellow", "canonical": "oklch(85.4% 0.171 87)", "tonalRamp": ["#481400", "#6b3700", "#8f5a00", "#b57f00", "#dca400", "#fec516", "#ffe64e", "#fff3b8"] },
+      "floor": { "role": "neutral", "displayName": "Concrete Floor", "canonical": "oklch(91.4% 0.007 116)", "tonalRamp": ["#262723", "#454541", "#666762", "#898a85", "#adaeaa", "#cdcec9", "#eeefea", "#f6f7f3"] },
+      "plate": { "role": "neutral", "displayName": "Alloy Plate", "canonical": "oklch(96.5% 0.005 118)", "tonalRamp": ["#262724", "#454542", "#666663", "#898a86", "#adaeab", "#cdceca", "#eeefeb", "#f7f8f4"] },
+      "ink": { "role": "neutral", "displayName": "Graphite Ink", "canonical": "oklch(19.5% 0.004 264)", "tonalRamp": ["#0a0b0d", "#252629", "#444547", "#656669", "#88898c", "#acaeb1", "#ccced1", "#edeef1"] },
+      "ink-3": { "role": "neutral", "displayName": "Quiet Ink", "canonical": "oklch(48.0% 0.011 258)", "tonalRamp": ["#23272c", "#41454b", "#62666c", "#858990", "#aaaeb5", "#c9ced5", "#eaeff6", "#f4f7fb"] },
+      "steel": { "role": "neutral", "displayName": "Steel Chapter", "canonical": "oklch(23.0% 0.007 258)", "tonalRamp": ["#090b0e", "#24272a", "#434549", "#64666a", "#87898d", "#abaeb2", "#cbced2", "#eceff3"] },
+      "lamp-go": { "role": "tertiary", "displayName": "Go Lamp Green", "canonical": "oklch(61.4% 0.150 152)", "tonalRamp": ["#003700", "#005913", "#007d37", "#27a25a", "#56c97e", "#79ea9d", "#9bffbd", "#d2ffe0"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The single hero claim, Archivo wdth 112." },
+      "headline": { "displayName": "Headline", "purpose": "Chapter titles, wdth 110." },
+      "title": { "displayName": "Title", "purpose": "Station and product names, wdth 108." },
+      "lead": { "displayName": "Lead", "purpose": "One-paragraph chapter intros in ink-2." },
+      "body": { "displayName": "Body", "purpose": "Reading text, normal width, max 65ch." },
+      "label": { "displayName": "Nameplate", "purpose": "Uppercase expanded captions, wdth 125." },
+      "data-condensed": { "displayName": "Condensed data", "purpose": "Tool chips, stacks, repo tags, wdth 75." },
+      "counter": { "displayName": "Counter", "purpose": "Proof numbers rendered by the odometer." }
+    },
+    "shadows": [
+      { "name": "plate", "value": "inset 0 1px 0 rgba(255,255,255,.75), 0 2px 6px -2px rgba(20,21,23,.12), 0 22px 44px -28px rgba(20,21,23,.42)", "purpose": "Alloy plates resting on the floor." },
+      { "name": "label", "value": "0 2px 6px -2px rgba(20,21,23,.14), 0 26px 48px -30px rgba(20,21,23,.5)", "purpose": "Paper shipping labels." },
+      { "name": "signal-button", "value": "inset 0 1px 0 rgba(255,255,255,.55), inset 0 -2px 0 rgba(0,0,0,.12), 0 12px 26px -14px rgba(150,105,0,.75)", "purpose": "Primary yellow button." },
+      { "name": "lamp-bezel", "value": "0 0 0 2px #f3f4f0, 0 0 0 3px rgba(20,21,23,.3)", "purpose": "Two-ring bezel around status lamps." }
+    ],
+    "motion": [
+      { "name": "ease-line", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The one easing curve for entrances, counters, icons and the menu sheet." },
+      { "name": "odometer-roll", "value": "1.15s ease-line, 80ms stagger per digit", "purpose": "Mechanical counter roll on first view." },
+      { "name": "hero-rise", "value": "1.1s clip-path rise, then 0.9s fade-up staggered 90ms", "purpose": "Only load-time entrance." },
+      { "name": "camera-blend", "value": "smootherstep across 0.75 viewport window centred on chapter edge; damped at 4.2/s; crane arc scaled by move length", "purpose": "Scroll-driven camera flight with dwell at each station." },
+      { "name": "reduced-motion", "value": "cut at midpoint, no parallax, no entrance, no counter roll", "purpose": "Replaces flights with cuts." }
+    ],
+    "breakpoints": [
+      { "name": "lg", "value": "1024px" },
+      { "name": "sm", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Signal Button",
+      "kind": "button",
+      "refersTo": "button-signal",
+      "description": "Primary action: yellow field with ink text.",
+      "html": "<a class=\"ds-btn-signal\" href=\"#\">Email me</a>",
+      "css": ".ds-btn-signal{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;min-height:3.25rem;padding:0 1.3rem;border-radius:6px;font-size:.8125rem;font-weight:720;letter-spacing:.07em;text-transform:uppercase;font-variation-settings:'wdth' 118;text-decoration:none;background:var(--signal,#ffc61a);color:var(--ink,#141517);border:1px solid var(--signal-deep,#c99400);box-shadow:0 1px 0 rgba(255,255,255,.55) inset,0 -2px 0 rgba(0,0,0,.12) inset,0 12px 26px -14px rgba(150,105,0,.75);transition:transform .15s cubic-bezier(.16,1,.3,1),background-color .2s ease}.ds-btn-signal:hover{background:var(--signal-hi,#ffd54f)}.ds-btn-signal:active{transform:translateY(1px)}.ds-btn-signal:focus-visible{outline:2px solid var(--ink,#141517);outline-offset:3px}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action: ink outline that inverts on hover.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Download CV</a>",
+      "css": ".ds-btn-outline{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;min-height:3.25rem;padding:0 1.3rem;border-radius:6px;font-size:.8125rem;font-weight:720;letter-spacing:.07em;text-transform:uppercase;font-variation-settings:'wdth' 118;text-decoration:none;border:1.5px solid var(--ink,#141517);color:var(--ink,#141517);transition:background-color .2s ease,color .2s ease}.ds-btn-outline:hover{background:var(--ink,#141517);color:var(--floor,#e2e3de)}.ds-btn-outline:active{transform:translateY(1px)}.ds-btn-outline:focus-visible{outline:2px solid var(--ink,#141517);outline-offset:3px}"
+    },
+    {
+      "name": "Alloy Plate",
+      "kind": "card",
+      "refersTo": "plate",
+      "description": "Station card on a machined plate with four screws.",
+      "html": "<article class=\"ds-plate\"><h3 class=\"ds-plate-title\"><span class=\"ds-num\">03</span>API</h3><p class=\"ds-plate-body\">Stateless services behind a typed contract.</p></article>",
+      "css": ".ds-plate{max-width:29rem;padding:2.25rem 2rem 2rem;background-color:var(--plate,#f3f4f0);border:1px solid rgba(20,21,23,.14);border-radius:6px;color:var(--ink,#141517);box-shadow:0 1px 0 rgba(255,255,255,.75) inset,0 2px 6px -2px rgba(20,21,23,.12),0 22px 44px -28px rgba(20,21,23,.42);background-image:radial-gradient(circle,#8f928b 0 1.6px,#c4c6bf 2.2px,transparent 3px),radial-gradient(circle,#8f928b 0 1.6px,#c4c6bf 2.2px,transparent 3px),radial-gradient(circle,#8f928b 0 1.6px,#c4c6bf 2.2px,transparent 3px),radial-gradient(circle,#8f928b 0 1.6px,#c4c6bf 2.2px,transparent 3px);background-size:8px 8px;background-repeat:no-repeat;background-position:left 9px top 9px,right 9px top 9px,left 9px bottom 9px,right 9px bottom 9px}.ds-plate-title{display:flex;align-items:center;gap:.75rem;margin:0;font-size:1.75rem;line-height:1.04;letter-spacing:-.02em;font-weight:760;font-variation-settings:'wdth' 108}.ds-num{display:inline-grid;place-items:center;height:1.45em;min-width:2.1em;padding:0 .4rem;border-radius:4px;background:var(--ink,#141517);color:var(--signal,#ffc61a);font-size:.62em;font-variant-numeric:tabular-nums}.ds-plate-body{margin:1rem 0 0;color:var(--ink-2,#3f4247);max-width:65ch}"
+    },
+    {
+      "name": "Shipping Label",
+      "kind": "card",
+      "refersTo": "shipping-label",
+      "description": "Paper label for a shipped product, fields split by 2px ink rules.",
+      "html": "<article class=\"ds-label\"><header class=\"ds-label-head\"><h3>Vivi AI</h3><span class=\"ds-tag\">AG-01</span></header><div class=\"ds-label-field\"><p>Multi-provider LLM service in production.</p></div><dl class=\"ds-label-metrics\"><div><dd>1,900+</dd><dt>Automated tests</dt></div><div><dd>3</dd><dt>LLM providers</dt></div></dl></article>",
+      "css": ".ds-label{max-width:46rem;background:#fbfbf7;border:2px solid #141517;border-radius:3px;color:#141517;box-shadow:0 2px 6px -2px rgba(20,21,23,.14),0 26px 48px -30px rgba(20,21,23,.5)}.ds-label-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:1.5rem 1.75rem 1rem}.ds-label-head h3{margin:0;font-size:1.75rem;line-height:1.04;letter-spacing:-.02em;font-weight:760;font-variation-settings:'wdth' 108}.ds-tag{padding:.375rem .5rem;border-radius:3px;background:#141517;color:#ffc61a;font-size:.75rem;font-weight:660;letter-spacing:.08em;text-transform:uppercase;font-variation-settings:'wdth' 125;font-variant-numeric:tabular-nums}.ds-label-field{border-top:2px solid #141517;padding:1.25rem 1.75rem;color:#3f4247}.ds-label-field p{margin:0}.ds-label-metrics{display:grid;grid-template-columns:repeat(2,1fr);margin:0;border-top:2px solid #141517}.ds-label-metrics div{display:flex;flex-direction:column-reverse;gap:.375rem;padding:1rem 1.75rem}.ds-label-metrics div+div{border-left:2px solid #141517}.ds-label-metrics dd{margin:0;font-size:1.75rem;line-height:1;letter-spacing:-.02em;font-weight:800;font-variation-settings:'wdth' 112;font-variant-numeric:tabular-nums}.ds-label-metrics dt{font-size:.8125rem;color:#3f4247}"
+    },
+    {
+      "name": "Status Lamp",
+      "kind": "custom",
+      "refersTo": "status-lamp",
+      "description": "Bezelled lamp: green live, yellow current, grey idle. No glow.",
+      "html": "<p class=\"ds-lamp-row\"><span class=\"ds-lamp\"></span> Available for new projects <span class=\"ds-lamp ds-lamp-active\"></span> <span class=\"ds-lamp ds-lamp-idle\"></span></p>",
+      "css": ".ds-lamp-row{display:flex;align-items:center;gap:.75rem;margin:0;color:#3f4247}.ds-lamp{display:inline-block;width:.5rem;height:.5rem;border-radius:999px;background:#1f9d55;box-shadow:0 0 0 2px #f3f4f0,0 0 0 3px rgba(20,21,23,.3)}.ds-lamp-active{background:#ffc61a}.ds-lamp-idle{background:#c9cbc4}"
+    },
+    {
+      "name": "Navigation Item",
+      "kind": "nav",
+      "refersTo": "nav-active-tag",
+      "description": "Header link; the active item carries the yellow tag.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#\">Process</a><a class=\"ds-nav-link ds-nav-on\" href=\"#\">Work</a><a class=\"ds-nav-link\" href=\"#\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;gap:.25rem}.ds-nav-link{padding:.5rem .75rem;border-radius:4px;font-size:.9375rem;font-weight:560;color:#3f4247;text-decoration:none;transition:color .2s}.ds-nav-link:hover{color:#141517}.ds-nav-on{background:#ffc61a;color:#141517}.ds-nav-link:focus-visible{outline:2px solid #141517;outline-offset:3px}"
+    },
+    {
+      "name": "Tool Chip",
+      "kind": "chip",
+      "refersTo": "tool-chip",
+      "description": "Condensed hairline chip for stack names.",
+      "html": "<span class=\"ds-chip\">FastAPI</span>",
+      "css": ".ds-chip{display:inline-block;padding:.25rem .5rem;border:1px solid rgba(20,21,23,.3);border-radius:4px;font-size:.8125rem;font-weight:560;color:#3f4247;font-variation-settings:'wdth' 75}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Production Line",
+    "overview": "The site is a daylight assembly hall. One fixed 3D stage sits behind every chapter and the scroll is the factory tour: a product is built station by station, then real systems leave the line with their numbers, then the line waits for the next order. Floor is concrete grey, ink is graphite, safety yellow is the painted line and the material of anything pressed or noticed. Content is physical: alloy plates with screws for what the machine says, paper shipping labels with heavy black rules for what has shipped. One typeface, three widths; the direction refuses the dark glowing-blob developer hero and the card-grid resume.",
+    "keyCharacteristics": [
+      "One light theme; page colour equals 3D floor and fog colour.",
+      "Yellow is a field or material, never ink on a light ground.",
+      "Two surface families: alloy plates (machine side) and paper labels (shipped side).",
+      "Status is shown by physical lamps in bezels, not by glows.",
+      "One scroll-driven camera flight with a dwell at each station.",
+      "Proof is numeric and mechanical: odometer counters, tabular figures."
+    ],
+    "rules": [
+      { "name": "The Field-Not-Ink Rule", "body": "Yellow is a surface or material. On the light ground it is never a text colour; yellow text is allowed only on ink or steel.", "section": "colors" },
+      { "name": "The Shared Floor Rule", "body": "Page background, 3D floor and fog are one colour. No second background tone behind scene-facing copy on wide screens.", "section": "colors" },
+      { "name": "The Lamp Rule", "body": "Green means live in production, yellow the current station, grey idle. No other status colours.", "section": "colors" },
+      { "name": "The Three Widths Rule", "body": "Never add a second family. Change width before font: expanded to name, normal to read, condensed to list.", "section": "typography" },
+      { "name": "The Tabular Figures Rule", "body": "Every counting or indexing number is tabular-nums.", "section": "typography" },
+      { "name": "The Lamp-Not-Glow Rule", "body": "A state is a lamp in a bezel. No blurred coloured halos on UI.", "section": "elevation" },
+      { "name": "The Resting-Part Rule", "body": "Shadows are negative-spread and mostly downward; they ground an object, never float it.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use floor as the only page background and keep copy left of the 3D line on wide screens.",
+      "Do use yellow as a filled field (button, tag, line, stripe) with ink text on top.",
+      "Do put machine-side content on alloy plates with four screws, and shipped products on paper labels with 2px ink rules between fields.",
+      "Do set names in expanded Archivo, reading text in normal width, lists and stacks in wdth 75.",
+      "Do show every state of a thing as a bezelled lamp: green live, yellow current, grey idle.",
+      "Do put any new number into an Odometer with tabular figures, and give it a label and source.",
+      "Do mark chapters that fully cover the viewport with data-opaque so the stage pauses; give scene-facing chapters a data-cam key.",
+      "Do keep content readable with WebGL off and motion reduced."
+    ],
+    "donts": [
+      "Don't set text in yellow on floor, plate or paper.",
+      "Don't add dark mode, a second typeface or a second accent hue; green is a lamp only.",
+      "Don't replace a lamp with a coloured glow or blurred halo.",
+      "Don't turn plates or labels into a uniform grid of identical cards; a plate is one station, a label is one shipped product.",
+      "Don't introduce a hard 2px-offset or other hard-edge drop shadow; plate and label shadows are soft and negative-spread.",
+      "Don't fly the camera under reduced motion; cut.",
+      "Don't put hazard stripes into the DOM UI; they exist natively at the quality gate and gantry in 3D."
+    ]
+  }
+}
