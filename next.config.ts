@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   // Pin the root: a stray lockfile in a parent folder makes Turbopack resolve
   // modules (e.g. tailwindcss) from the wrong directory.
   turbopack: { root: __dirname },
+  // ponytail: dev-only. drei's <Html> renders each window into its own React
+  // root; StrictMode's double effects make the deferred unmount of the first
+  // root wipe the second, so windows render empty in dev. Production never
+  // double-invokes effects. Re-enable once drei's Html survives StrictMode.
+  reactStrictMode: false,
 };
 
 export default nextConfig;

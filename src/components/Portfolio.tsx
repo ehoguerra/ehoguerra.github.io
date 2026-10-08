@@ -4,11 +4,11 @@ import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { translations, type Locale } from "@/lib/i18n";
 import { useReducedMotion } from "@/lib/hooks";
 import { useSmoothScroll } from "@/lib/scroll";
-import { LineStage } from "./three/LineStage";
+import { Stage } from "./three/Stage";
 import { Navbar } from "./Navbar";
 import { Hero } from "./Hero";
-import { Line } from "./Line";
-import { Shipped } from "./Shipped";
+import { Work } from "./Work";
+import { Build } from "./Build";
 import { TrackRecord } from "./TrackRecord";
 import { OpenSource } from "./OpenSource";
 import { Contact } from "./Contact";
@@ -63,8 +63,8 @@ export function Portfolio() {
 
   const navItems = useMemo(
     () => [
-      { id: "process", label: t.nav.line },
       { id: "work", label: t.nav.work },
+      { id: "build", label: t.nav.build },
       { id: "experience", label: t.nav.record },
       { id: "open-source", label: t.nav.open },
       { id: "contact", label: t.nav.contact },
@@ -74,15 +74,15 @@ export function Portfolio() {
 
   return (
     <>
-      <a href="#main" className="skip-link btn btn-signal">
+      <a href="#main" className="skip-link pill pill-primary">
         {t.meta.skip}
       </a>
-      <LineStage />
+      <Stage sims={t.sims} sim={t.work.sim} />
       <Navbar items={navItems} locale={locale} onLocaleChange={choose} t={t.nav} meta={t.meta} />
       <main id="main" className="relative z-10">
         <Hero t={t.hero} locale={locale} />
-        <Line t={t.line} />
-        <Shipped t={t.shipped} />
+        <Work t={t.work} />
+        <Build t={t.build} />
         <TrackRecord t={t.record} />
         <OpenSource t={t.openSource} />
         <Contact t={t.contact} locale={locale} />

@@ -1,5 +1,5 @@
 /**
- * Locale-independent site data: links, stations, products, stacks.
+ * Locale-independent site data: links, disciplines, products, stacks.
  * All translatable copy lives in `i18n.ts`, keyed by the ids declared here.
  */
 
@@ -15,10 +15,10 @@ export const CV = {
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* The line: build stations, in order                                  */
+/* How I build: disciplines, in the order a product needs them        */
 /* ------------------------------------------------------------------ */
 
-export type StationId =
+export type DisciplineId =
   | "architecture"
   | "data"
   | "api"
@@ -27,12 +27,12 @@ export type StationId =
   | "quality"
   | "ship";
 
-export interface StationMeta {
-  readonly id: StationId;
+export interface DisciplineMeta {
+  readonly id: DisciplineId;
   readonly tools: readonly string[];
 }
 
-export const STATIONS: readonly StationMeta[] = [
+export const DISCIPLINES: readonly DisciplineMeta[] = [
   {
     id: "architecture",
     tools: ["Clean Architecture", "Multi-tenant SaaS", "RBAC", "Domain modelling"],
@@ -74,7 +74,6 @@ export interface ProjectMeta {
   readonly stack: readonly string[];
 }
 
-/** Order matches the pallet in the 3D scene: index 0 is the case on top. */
 export const PROJECTS: readonly ProjectMeta[] = [
   {
     id: "vivi",

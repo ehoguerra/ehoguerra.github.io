@@ -1,4 +1,5 @@
-import type { ExperienceId, ProjectId, RepoId, StationId } from "./site";
+import type { Sims } from "@/components/windows";
+import type { DisciplineId, ExperienceId, ProjectId, RepoId } from "./site";
 
 export type Locale = "en" | "pt";
 
@@ -12,8 +13,8 @@ const en = {
   },
 
   nav: {
-    line: "Process",
     work: "Work",
+    build: "How I build",
     record: "Experience",
     open: "Open source",
     contact: "Contact",
@@ -27,17 +28,14 @@ const en = {
     secondary: "Download CV",
     status: "Available for new projects",
     place: "Nova Friburgo, Brazil · remote",
-    scroll: "Scroll to run the line",
+    scroll: "Scroll to walk the workspace",
   },
 
-  line: {
-    title: "How a product gets built here",
-    lead: "Every product goes down the same line: seven stations, one builder, nothing handed off. Keep scrolling and watch one come together.",
-    station: "Station",
-    of: "of",
-    tools: "Tools at this station",
-    position: "Position on the line",
-    stations: {
+  build: {
+    title: "How I build",
+    lead: "Seven disciplines, one builder, nothing handed off. Every one of them has shipped in a product above.",
+    tools: "Tools",
+    items: {
       architecture: {
         title: "Architecture",
         body: "Every build starts with the domain, not the framework. I map the business into modules, tenants and permissions, then set the boundaries that keep a codebase changeable past 80,000 lines.",
@@ -94,19 +92,24 @@ const en = {
       },
       ship: {
         title: "Ship",
-        body: "Containerised with Docker and deployed through CI to the cloud. Then the next product goes on the line.",
+        body: "Containerised with Docker and deployed through CI to the cloud. Then the next product starts.",
         proof: {
           value: "7",
           label: "products built and shipped end to end",
-          source: "Listed below",
+          source: "Listed above",
         },
       },
-    } satisfies Record<StationId, StationCopy>,
+    } satisfies Record<DisciplineId, DisciplineCopy>,
   },
 
-  shipped: {
-    title: "Off the line",
-    lead: "Seven systems designed, built and shipped, most of them solo, from the first migration to the last deploy.",
+  work: {
+    title: "Shipped and running",
+    lead: "Seven systems designed, built and shipped, most of them solo, from the first migration to the last deploy. Each window runs a simulation of what its product does.",
+    sim: "Simulation · synthetic data",
+    more: {
+      title: "Also shipped",
+      lead: "Three more systems, from a sports academy to a clinic running in production.",
+    },
     role: "Role",
     stack: "Stack",
     manifest: "Full manifest",
@@ -298,13 +301,119 @@ const en = {
   },
 
   contact: {
-    title: "Next on the line: your product.",
+    title: "Your product could be the next window here.",
     lead: "Open to new projects, full-time roles and collaborations, whether you need a whole product built from scratch or AI wired into systems you already run.",
     primary: "Email me",
     copy: "Copy email address",
     copied: "Email address copied",
     cv: "Download CV",
   },
+
+  sims: {
+    vivi: {
+      sub: "Visol · AI assistant",
+      live: "In production",
+      question: "How much did plant #2187 generate in September?",
+      intent: "generation_report",
+      tool: "get_generation(plant=2187, month=9)",
+      answer: "September: 4,218 kWh, 6% above August. The best day was the 14th.",
+      chain: "Model chain",
+      trying: "Trying",
+      timeout: "Timed out",
+      answered: "Answered",
+      standby: "Standby",
+      fallback: "Automatic fallback",
+      latency: "end to end",
+      ask: "Ask Vivi",
+    },
+    zelo: {
+      sub: "Medication care",
+      reading: "Reading the box",
+      read: "Text recognised",
+      match: "Matched in the ANVISA catalogue",
+      drug: "Losartan potassium 50 mg",
+      form: "Coated tablet · oral",
+      doses: "Doses",
+      daily: "Every day",
+      synced: "Caregivers in sync",
+    },
+    evosolar: {
+      fmt: "en-US",
+      sub: "Franchise network",
+      units: "Units",
+      month: "October",
+      leads: "Leads",
+      contracts: "Contracts",
+      royalties: "Royalties",
+      auto: "Royalties calculated automatically",
+      installed: "kWp installed per month",
+      sla: "Support chat SLA",
+      onTime: "On time",
+    },
+    fantasy: {
+      fmt: "en-US",
+      sub: "Survivor fantasy football",
+      round: "Brasileirão · Round 28",
+      pick: "Your pick",
+      live: "Live",
+      ft: "Full time",
+      survived: "Survived",
+      alive: "Players still in",
+      wallet: "Wallet",
+      picks: "Picks",
+      prize: "Prize balance",
+    },
+    br1: {
+      sub: "Academy management",
+      athleteMeta: "U-15 · Midfielder",
+      bio: "Bioimpedance",
+      lean: "Lean mass",
+      leanValue: "41.2 kg",
+      fat: "Body fat",
+      fatValue: "13.8%",
+      hydration: "Hydration",
+      hydrationValue: "62%",
+      who: "Who sees this",
+      coach: "Coach",
+      doctor: "Doctor",
+      psychologist: "Psychologist",
+      trainer: "Trainer",
+      granted: "Access",
+      report: "Athlete report",
+      generating: "Merging sections…",
+      ready: "3 pages merged · PDF ready",
+      sections: ["Profile", "Body composition", "Evaluation"],
+    },
+    cesh: {
+      sub: "Academic social network",
+      days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+      calc: "Calc II",
+      databases: "Databases",
+      networks: "Networks",
+      physics: "Physics II",
+      syncing: "Syncing with the portal…",
+      synced: "Synced by the browser extension · no password stored",
+      deviceStep: "Authorize on github.com",
+      authorized: "Authorized",
+      question: "Explain question 3 of the list",
+      answer: "Question 3 uses integration by parts. Choose u and dv, then apply uv minus the integral of v du.",
+    },
+    pecci: {
+      sub: "Integrated-care clinic",
+      live: "In production",
+      physio: "Physiotherapy",
+      psych: "Psychology",
+      nutrition: "Nutrition",
+      speech: "Speech therapy",
+      now: "Now",
+      selectHint: "Select an appointment",
+      evolution: "Evolution note",
+      role: "Speech therapist",
+      note: "Good tolerance to the new articulation exercises. Clear progress on /r/ in words. Keep the home routine and review in two weeks.",
+      saved: "Saved to the record",
+      progress: "Progress over sessions",
+    },
+  } satisfies Sims,
 
   footer: {
     built: "Designed and built by Artur Guerra with Next.js and Three.js.",
@@ -319,7 +428,7 @@ const en = {
 /* Shape helpers                                                       */
 /* ------------------------------------------------------------------ */
 
-interface StationCopy {
+interface DisciplineCopy {
   title: string;
   body: string;
   proof: { value: string; label: string; source: string };
@@ -361,8 +470,8 @@ const pt: Translations = {
   },
 
   nav: {
-    line: "Processo",
     work: "Projetos",
+    build: "Como construo",
     record: "Trajetória",
     open: "Open source",
     contact: "Contato",
@@ -376,17 +485,14 @@ const pt: Translations = {
     secondary: "Baixar CV",
     status: "Disponível para novos projetos",
     place: "Nova Friburgo, Brasil · remoto",
-    scroll: "Role para rodar a linha",
+    scroll: "Role para percorrer o espaço",
   },
 
-  line: {
-    title: "Como um produto é construído aqui",
-    lead: "Todo produto desce pela mesma linha: sete estações, um construtor, nada terceirizado. Continue rolando e veja um ganhar forma.",
-    station: "Estação",
-    of: "de",
-    tools: "Ferramentas nesta estação",
-    position: "Posição na linha",
-    stations: {
+  build: {
+    title: "Como eu construo",
+    lead: "Sete disciplinas, um construtor, nada terceirizado. Cada uma delas já foi entregue em um dos produtos acima.",
+    tools: "Ferramentas",
+    items: {
       architecture: {
         title: "Arquitetura",
         body: "Toda construção começa pelo domínio, não pelo framework. Eu mapeio o negócio em módulos, tenants e permissões e defino os limites que mantêm um código alterável além de 80.000 linhas.",
@@ -443,19 +549,24 @@ const pt: Translations = {
       },
       ship: {
         title: "Entrega",
-        body: "Containerizado com Docker e publicado via CI na nuvem. Depois, o próximo produto entra na linha.",
+        body: "Containerizado com Docker e publicado via CI na nuvem. Depois, começa o próximo produto.",
         proof: {
           value: "7",
           label: "produtos construídos e entregues de ponta a ponta",
-          source: "Listados abaixo",
+          source: "Listados acima",
         },
       },
     },
   },
 
-  shipped: {
-    title: "Saiu da linha",
-    lead: "Sete sistemas projetados, construídos e entregues, a maioria sozinho, da primeira migration ao último deploy.",
+  work: {
+    title: "Entregues e rodando",
+    lead: "Sete sistemas projetados, construídos e entregues, a maioria sozinho, da primeira migration ao último deploy. Cada janela roda uma simulação do que o produto faz.",
+    sim: "Simulação · dados fictícios",
+    more: {
+      title: "Também entregues",
+      lead: "Mais três sistemas, de uma academia esportiva a uma clínica rodando em produção.",
+    },
     role: "Papel",
     stack: "Stack",
     manifest: "Manifesto completo",
@@ -649,12 +760,118 @@ const pt: Translations = {
   },
 
   contact: {
-    title: "Próximo na linha: o seu produto.",
+    title: "O próximo app nesta tela pode ser o seu.",
     lead: "Aberto a novos projetos, vagas full-time e colaborações, seja para construir um produto completo do zero ou integrar IA aos sistemas que você já opera.",
     primary: "Me envie um email",
     copy: "Copiar endereço de email",
     copied: "Endereço de email copiado",
     cv: "Baixar CV",
+  },
+
+  sims: {
+    vivi: {
+      sub: "Visol · assistente de IA",
+      live: "Em produção",
+      question: "Quanto a usina #2187 gerou em setembro?",
+      intent: "generation_report",
+      tool: "get_generation(plant=2187, month=9)",
+      answer: "Setembro: 4.218 kWh, 6% acima de agosto. O melhor dia foi o 14.",
+      chain: "Cadeia de modelos",
+      trying: "Tentando",
+      timeout: "Tempo esgotado",
+      answered: "Respondeu",
+      standby: "Reserva",
+      fallback: "Fallback automático",
+      latency: "de ponta a ponta",
+      ask: "Pergunte à Vivi",
+    },
+    zelo: {
+      sub: "Cuidado com medicamentos",
+      reading: "Lendo a caixa",
+      read: "Texto reconhecido",
+      match: "Encontrado no catálogo ANVISA",
+      drug: "Losartana potássica 50 mg",
+      form: "Comprimido revestido · oral",
+      doses: "Doses",
+      daily: "Todos os dias",
+      synced: "Cuidadores sincronizados",
+    },
+    evosolar: {
+      fmt: "pt-BR",
+      sub: "Rede de franquias",
+      units: "Unidades",
+      month: "Outubro",
+      leads: "Leads",
+      contracts: "Contratos",
+      royalties: "Royalties",
+      auto: "Royalties calculados automaticamente",
+      installed: "kWp instalados por mês",
+      sla: "SLA do chat de suporte",
+      onTime: "No prazo",
+    },
+    fantasy: {
+      fmt: "pt-BR",
+      sub: "Fantasy survivor de futebol",
+      round: "Brasileirão · Rodada 28",
+      pick: "Seu pick",
+      live: "Ao vivo",
+      ft: "Encerrado",
+      survived: "Sobreviveu",
+      alive: "Jogadores vivos",
+      wallet: "Carteira",
+      picks: "Picks",
+      prize: "Saldo de prêmios",
+    },
+    br1: {
+      sub: "Gestão de academia",
+      athleteMeta: "Sub-15 · Meio-campista",
+      bio: "Bioimpedância",
+      lean: "Massa magra",
+      leanValue: "41,2 kg",
+      fat: "Gordura corporal",
+      fatValue: "13,8%",
+      hydration: "Hidratação",
+      hydrationValue: "62%",
+      who: "Quem vê isto",
+      coach: "Treinador",
+      doctor: "Médico",
+      psychologist: "Psicólogo",
+      trainer: "Preparador físico",
+      granted: "Acesso",
+      report: "Relatório do atleta",
+      generating: "Unindo as seções…",
+      ready: "3 páginas unidas · PDF pronto",
+      sections: ["Perfil", "Composição corporal", "Avaliação"],
+    },
+    cesh: {
+      sub: "Rede social acadêmica",
+      days: ["Seg", "Ter", "Qua", "Qui", "Sex"],
+      calc: "Cálculo II",
+      databases: "Bancos de Dados",
+      networks: "Redes",
+      physics: "Física II",
+      syncing: "Sincronizando com o portal…",
+      synced: "Sincronizado pela extensão do navegador · nenhuma senha guardada",
+      deviceStep: "Autorize em github.com",
+      authorized: "Autorizado",
+      question: "Explique a questão 3 da lista",
+      answer: "A questão 3 usa integração por partes. Escolha u e dv e aplique uv menos a integral de v du.",
+    },
+    pecci: {
+      sub: "Clínica de cuidado integrado",
+      live: "Em produção",
+      physio: "Fisioterapia",
+      psych: "Psicologia",
+      nutrition: "Nutrição",
+      speech: "Fonoaudiologia",
+      now: "Agora",
+      selectHint: "Selecione um atendimento",
+      evolution: "Evolução",
+      role: "Fonoaudióloga",
+      note: "Boa tolerância aos novos exercícios de articulação. Evolução clara do /r/ em palavras. Manter a rotina em casa e revisar em duas semanas.",
+      saved: "Salvo no prontuário",
+      progress: "Progresso ao longo das sessões",
+    },
   },
 
   footer: {

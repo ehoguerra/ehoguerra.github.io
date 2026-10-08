@@ -15,19 +15,18 @@ export function Odometer({ value, className = "" }: { value: string; className?:
   useEffect(() => {
     const el = ref.current;
     if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const r = el.getBoundingClientRect();
-    if (r.top < window.innerHeight && r.bottom > 0) return;
+    // In view or already passed when the page hydrates (an anchor link, a
+    // restored scroll): keep the server's final value, there is nothing to roll.
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
     el.dataset.state = "reset";
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (!e.isIntersecting) return;
-        el.dataset.state = "roll";
-        io.disconnect();
-      },
-      { rootMargin: "0px 0px -4% 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
+    // In view or already scrolled past (an anchor jump never intersects).
+    const check = () => {
+      if (el.getBoundingClientRect().top > window.innerHeight * 0.96) return;
+      el.dataset.state = "roll";
+      window.removeEventListener("scroll", check);
+    };
+    window.addEventListener("scroll", check, { passive: true });
+    return () => window.removeEventListener("scroll", check);
   }, []);
 
   let n = 0;

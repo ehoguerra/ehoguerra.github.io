@@ -1,13 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo } from "next/font/google";
+import { JetBrains_Mono, Mona_Sans } from "next/font/google";
 import "./globals.css";
 
-// One family, three voices: the width axis gives expanded nameplates,
-// normal reading text and condensed data from the same face.
-const archivo = Archivo({
-  variable: "--font-archivo",
+// GitHub's own face for everything a visitor reads; its width axis gives
+// the display voice. JetBrains Mono only where the content is code or a trace.
+const mona = Mona_Sans({
+  variable: "--font-mona",
   subsets: ["latin"],
   axes: ["wdth"],
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-jb",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -20,19 +26,19 @@ const DESCRIPTION =
    markup so the finish review can audit the render against it.
    Static, author-written string: no user input reaches it. */
 const CONTRACT = `<!--
-THESIS: The site is Artur's production line. Scrolling runs his build process station by station until real products ship. It refuses the dark glowing-blob developer hero and the card-grid resume.
-OWN-WORLD: Daylight assembly hall: concrete-grey floor, graphite ink, safety-yellow line and fields; machined alloy plates with screws, black belt rubber, status lamps; Archivo expanded for nameplates, normal for reading.
-STORY: A founder or recruiter watches a product get built (architecture, data, API, AI, interface, tests, ship), sees the systems that left the line with real numbers, then emails Artur or takes the CV.
-FIRST VIEWPORT: Left: the claim "I build real products end to end." with email and CV actions; right: the 3D line receding diagonally with the finished product at its end; yellow floor line running out of frame.
-FORM: Production line, candidate 3 of 7, seed d74f41d2.
+THESIS: Artur's shipped products run live as glass app windows floating in a dusk-lit room; the visitor walks a spatial workspace instead of scanning a static grid of project cards.
+OWN-WORLD: Layered Serra Fluminense ridgelines under an indigo-to-ember sky; frosted glass windows with lit rims, 34px corners and grabber pills; each product's accent glowing inside its own window; warm-white pills; Mona Sans across widths, JetBrains Mono only for traces.
+STORY: The visitor watches the products work (an AI chat failing over between LLMs, OCR reading a medicine box, a franchise dashboard settling royalties), learns he ships end to end with AI in production, then emails him or takes the CV.
+FIRST VIEWPORT: Headline and actions on the left over the sky; four live windows arced across the right two-thirds at staggered depths, Vivi largest in front; ridges below; the pointer tilts the room.
+FORM: Spatial workspace, candidate 1 of 7, seed 87648a41.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 -->`;
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#e2e3de",
-  colorScheme: "light",
+  themeColor: "#07080f",
+  colorScheme: "dark",
 };
 
 export const metadata: Metadata = {
@@ -117,8 +123,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${archivo.variable} antialiased`}>
-      <body className="min-h-dvh overflow-x-clip bg-floor text-ink">
+    <html lang="en" className={`${mona.variable} ${mono.variable}`}>
+      <body className="min-h-dvh overflow-x-clip bg-night text-ink">
         <div hidden dangerouslySetInnerHTML={{ __html: CONTRACT }} />
         <script
           type="application/ld+json"
