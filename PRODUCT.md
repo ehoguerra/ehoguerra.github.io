@@ -47,14 +47,17 @@ proved by shipped systems with hard numbers rather than demos.
 - The legal identity (legal name, CNPJ, domain, `"@type": "Organization"` JSON-LD) must
   stay in `layout.tsx`, `Footer.tsx` (`t.company`) and `i18n.ts`; enforced by
   `tests/company-identity.test.mjs`.
-- Most products are private repositories with no public screenshots.
+- Most products are private repositories with no public screenshots, so the site shows
+  each product as an authored simulation with synthetic data. Every simulation stays
+  tagged as synthetic; every claim outside the windows stays real.
 
 ## Brand Commitments
 
 - Name Artur Guerra; domain arturguerra.com; GitHub `ehoguerra`; LinkedIn
   `artur-guerra-dev`; email arturpvguerra@gmail.com.
 - Voice (existing copy): first person, direct, concrete — "Not demos. Production."
-- No logo exists; the "AG" tile is a placeholder, not a commitment. *(inferred)*
+- The mark is two stacked app windows over a grabber (nav and favicon), drawn with the
+  spatial-workspace design; not a registered logo.
 
 ## Evidence on Hand
 
