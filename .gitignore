@@ -44,3 +44,8 @@ next-env.d.ts
 # playwright
 /tests/e2e/report/
 /tests/e2e/results/
+
+# impeccable session artifacts
+/.impeccable/questions/
+/.impeccable/review/
+/.impeccable/mocks/
