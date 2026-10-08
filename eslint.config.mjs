@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Prebuilt showcase apps (Vite bundles built in their own repos).
+    "public/showcase/**",
   ]),
 ]);
 
