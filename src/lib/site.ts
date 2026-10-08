@@ -130,20 +130,48 @@ export const PROJECTS: readonly ProjectMeta[] = [
 /* Track record                                                        */
 /* ------------------------------------------------------------------ */
 
-export type ExperienceId = "visol" | "freelance" | "cefet";
+export type ExperienceId = "zelo" | "visol" | "freelance" | "cefet";
+
+/** A stretch of time on the track-record timeline, in fractional years. */
+export interface Span {
+  readonly from: number;
+  /** "now" runs to the build month. */
+  readonly to: number | "now";
+  /** An earlier phase of the same role, drawn dimmer (an internship). */
+  readonly earlier?: boolean;
+}
 
 export interface ExperienceMeta {
   readonly id: ExperienceId;
   readonly tags: readonly string[];
+  readonly spans: readonly Span[];
 }
 
+/** Year and month (1–12) as a fractional year. */
+const ym = (year: number, month = 1) => year + (month - 1) / 12;
+
+/** Current work first, then the paths that led to it. */
 export const EXPERIENCE: readonly ExperienceMeta[] = [
-  { id: "visol", tags: ["Python", "FastAPI", "LLMs", "PHP", "Angular", "Ionic"] },
+  {
+    id: "zelo",
+    tags: ["FastAPI", "React Native", "Expo", "PostgreSQL", "Celery", "LLMs"],
+    spans: [{ from: ym(2026), to: "now" }],
+  },
+  {
+    id: "visol",
+    tags: ["Python", "FastAPI", "Rust", "Redis", "LLMs", "PHP", "Angular", "Ionic"],
+    spans: [
+      { from: ym(2025), to: ym(2026, 9), earlier: true },
+      { from: ym(2026, 9), to: "now" },
+    ],
+  },
   {
     id: "freelance",
     tags: ["FastAPI", "React", "React Native", "PostgreSQL", "Multi-tenant"],
+    spans: [{ from: ym(2024), to: "now" }],
   },
-  { id: "cefet", tags: ["Information Systems"] },
+  // Graduation expected at the end of 2028.
+  { id: "cefet", tags: ["Information Systems"], spans: [{ from: ym(2025), to: ym(2029) }] },
 ] as const;
 
 /* ------------------------------------------------------------------ */

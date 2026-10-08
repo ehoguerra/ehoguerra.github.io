@@ -85,9 +85,10 @@ Numbers are quoted exactly from the sources.
   Chat via OAuth Device Flow.
 - **Pecci Cuidado Integrado**: clinic management for a client, in production; Flask,
   PostgreSQL; freelance.
-- **Experience**: Visol, Full Stack Developer (internship), 2025–present; Freelance /
-  Independent Full Stack & SaaS Developer, 2024–present; B.Sc. Information Systems,
-  CEFET/RJ Nova Friburgo, 2025–2028 (in progress).
+- **Experience**: Zelo, Founder, 2026–present; Visol, Full Stack Developer, 2025–present
+  (intern 2025–Sep 2026, hired Sep 2026; also works with Rust and Redis there);
+  Freelance / Independent Full Stack & SaaS Developer, 2024–present; B.Sc. Information
+  Systems, CEFET/RJ Nova Friburgo, 2025–2028 (in progress).
 - **Open source** (github.com/ehoguerra): kimi-plugin-cc, ultimate-claude-content-gen,
   encurta-ai, nestjs-clean-arch, erp_system, zelo_docs.
 - **CV PDFs**: `public/cv/Artur_Guerra_CV_EN.pdf`, `public/cv/Artur_Guerra_CV_PT.pdf`

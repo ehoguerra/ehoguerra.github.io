@@ -353,6 +353,30 @@
   }
 
   /* ============================================================
+     Track record timeline: time still ahead is dashed; on first
+     view each rail draws from 2024 up to today with the scroll.
+     ============================================================ */
+  .span-ahead {
+    background: repeating-linear-gradient(90deg, rgba(246, 243, 238, 0.42) 0 5px, transparent 5px 10px);
+  }
+
+  @keyframes draw {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .timeline-draw {
+        animation: draw linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 38%;
+      }
+    }
+  }
+
+  /* ============================================================
      Stage: the fixed room behind every chapter. Without WebGL it
      keeps a painted dusk and the ridges, so nothing is lost.
      ============================================================ */

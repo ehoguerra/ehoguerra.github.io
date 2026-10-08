@@ -28,6 +28,9 @@
  * 21. External links without rel="noopener".
  * 22. A Portuguese-language browser with no stored choice still gets English.
  * 23. Social card missing or wrong: og:image absent, not a 200 JPEG, or not 1200x630.
+ * 24. Track record out of date: Zelo missing or not first as the current role (Founder,
+ *     2026 – now); Visol still listed as an internship or without Rust and Redis; the
+ *     timeline's "now" ticks misaligned across rows, or a current span with no width.
  * Plus: "evidence" screenshots (hero, vivi, zelo, more, build, contact) per project.
  */
 import { expect, test, type Page, type TestInfo } from "@playwright/test";
@@ -520,6 +523,32 @@ test("23. social card is declared and served as a 1200x630 JPEG", async ({ page,
   const res = await request.get(url.pathname + url.search);
   expect(res.status(), `GET ${url.pathname}${url.search}`).toBe(200);
   expect(res.headers()["content-type"] ?? "", "og:image content-type").toContain("image/jpeg");
+});
+
+test("24. track record: Zelo current, Visol full stack with Rust and Redis, aligned timeline", async ({ page }) => {
+  await open(page);
+  await scrollToTop(page, "#experience", 1000);
+  const rows = page.locator("#experience [data-exp]");
+  await expect(rows.first(), "Zelo is not the first experience").toHaveAttribute("data-exp", "zelo");
+  await expect(rows.first()).toContainText("Founder");
+  await expect(rows.first()).toContainText("2026 – now");
+
+  const visol = page.locator('#experience [data-exp="visol"]');
+  await expect(visol.locator("h3"), "Visol role still shows the internship").toHaveText("Full Stack Developer");
+  for (const tag of ["Rust", "Redis"]) {
+    await expect(visol.locator(".chip").filter({ hasText: new RegExp(`^${tag}$`) }), `Visol stack lacks ${tag}`).toHaveCount(1);
+  }
+
+  const ticks = await page
+    .locator("#experience [data-now]")
+    .evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().left)));
+  expect(ticks.length, "expected one now tick per row").toBe(await rows.count());
+  expect(Math.max(...ticks) - Math.min(...ticks), `now ticks misaligned: ${ticks.join(", ")}`).toBeLessThanOrEqual(1);
+  const widths = await page
+    .locator('#experience [data-kind="now"]')
+    .evaluateAll((els) => els.map((e) => e.getBoundingClientRect().width));
+  expect(widths.length, "no current spans drawn").toBeGreaterThan(0);
+  expect(widths.every((w) => w > 2), `a current span has no width: ${widths.join(", ")}`).toBe(true);
 });
 
 test("evidence: viewport screenshots of hero, vivi, zelo, more, build, contact", async ({ page }, testInfo) => {

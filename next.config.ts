@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
   // root wipe the second, so windows render empty in dev. Production never
   // double-invokes effects. Re-enable once drei's Html survives StrictMode.
   reactStrictMode: false,
+  // The build month, for the "now" marker on the track-record timeline.
+  env: { BUILD_MONTH: new Date().toISOString().slice(0, 7) },
 };
 
 export default nextConfig;

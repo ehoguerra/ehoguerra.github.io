@@ -248,12 +248,21 @@ const en = {
 
   record: {
     title: "Track record",
+    lead: "Now: founder of Zelo, full stack developer at Visol and Information Systems student at CEFET/RJ.",
+    now: "now",
     items: {
+      zelo: {
+        period: "2026 – now",
+        role: "Founder",
+        org: "Zelo · medication-care healthtech",
+        body: "Founded Zelo and build the product end to end: a FastAPI backend with 38 endpoints across 15 service domains, a React Native app on Expo, OCR that reads medicine boxes against the ANVISA catalogue, a three-provider LLM chain with fallback, and LGPD compliance.",
+      },
       visol: {
         period: "2025 – now",
-        role: "Full Stack Developer, internship",
+        role: "Full Stack Developer",
         org: "Visol · solar-energy SaaS and CRM",
-        body: "Designed and shipped Vivi AI, the company's production assistant. Led the OWASP security hardening of the PHP core (SQL injection, IDOR, SSRF, webhook HMAC, OAuth CSRF) and integrated the franchise hub across the Angular CRM and the Ionic app.",
+        phases: "Intern from 2025 to Sep 2026, hired in Sep 2026",
+        body: "Designed and shipped Vivi AI, the company's production assistant. Led the OWASP security hardening of the PHP core (SQL injection, IDOR, SSRF, webhook HMAC, OAuth CSRF) and integrated the franchise hub across the Angular CRM and the Ionic app. Day to day I also work with Rust and Redis.",
       },
       freelance: {
         period: "2024 – now",
@@ -443,10 +452,12 @@ interface ProjectCopy {
   role: string;
 }
 
-interface ExperienceCopy {
+export interface ExperienceCopy {
   period: string;
   role: string;
   org: string;
+  /** How the role changed over time, when it did. */
+  phases?: string;
   body: string;
 }
 
@@ -705,12 +716,21 @@ const pt: Translations = {
 
   record: {
     title: "Trajetória",
+    lead: "Hoje: fundador do Zelo, desenvolvedor full stack na Visol e estudante de Sistemas de Informação no CEFET/RJ.",
+    now: "hoje",
     items: {
+      zelo: {
+        period: "2026 – atual",
+        role: "Fundador",
+        org: "Zelo · healthtech de cuidado com medicamentos",
+        body: "Fundei o Zelo e construo o produto de ponta a ponta: backend FastAPI com 38 endpoints em 15 domínios de serviço, app React Native com Expo, OCR que lê caixas de remédio contra o catálogo da ANVISA, cadeia de 3 provedores de LLM com fallback e conformidade com a LGPD.",
+      },
       visol: {
         period: "2025 – atual",
-        role: "Desenvolvedor Full Stack, estágio",
+        role: "Desenvolvedor Full Stack",
         org: "Visol · SaaS e CRM de energia solar",
-        body: "Projetei e entreguei a Vivi AI, o assistente em produção da empresa. Liderei o hardening de segurança OWASP do core PHP (SQL injection, IDOR, SSRF, HMAC de webhook, CSRF em OAuth) e integrei o hub de franquias ao CRM Angular e ao app Ionic.",
+        phases: "Estágio de 2025 a set. 2026, efetivado em set. 2026",
+        body: "Projetei e entreguei a Vivi AI, o assistente em produção da empresa. Liderei o hardening de segurança OWASP do core PHP (SQL injection, IDOR, SSRF, HMAC de webhook, CSRF em OAuth) e integrei o hub de franquias ao CRM Angular e ao app Ionic. No dia a dia também trabalho com Rust e Redis.",
       },
       freelance: {
         period: "2024 – atual",
